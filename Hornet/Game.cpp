@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "HtCamera.h"
 #include "ObjectManager.h"
+#include "Adventurer.h"
+#include "Background.h"
 
 void Game::StartOfProgram()
 {
@@ -15,7 +17,12 @@ void Game::StartOfProgram()
 // Use this function to intialise your game objects and load any assets
 void Game::StartOfGame()
 {
-
+    Background* background = new Background();
+    background->initialise();
+    ObjectManager::instance.AddItem(background);
+    Adventurer* player = new Adventurer();
+    player->initialise();
+    ObjectManager::instance.AddItem(player);
 
 
 }

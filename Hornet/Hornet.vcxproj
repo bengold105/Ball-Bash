@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Adventurer.cpp" />
     <ClCompile Include="Angle.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="ErrorLogger.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -160,7 +162,9 @@
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Adventurer.h" />
     <ClInclude Include="Angle.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="ErrorLogger.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Game.h" />
@@ -180,6 +184,9 @@
     <ClInclude Include="Result.h" />
     <ClInclude Include="Shapes.h" />
     <ClInclude Include="Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\placeholderplayer.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
