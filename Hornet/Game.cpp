@@ -4,6 +4,22 @@
 #include "Adventurer.h"
 #include "Background.h"
 
+/*
+TODO List:
+- tiled dungeon
+use a config file with the tile as a list of numbers
+- attacks
+make them part of the player class
+use closest objects and vectors to figure out if the enemy is in front and attackable, then add animations and effects
+- move to mouse pointer
+watch chris's video
+- enemy pathing (diagonals)
+use getclosestobject and then vectors to determine the directional movement
+- minimap 
+use objectmanager list of objects and their position, scaled down to show a minimap (draw objects as dots)
+*/
+
+
 void Game::StartOfProgram()
 {
 
@@ -11,7 +27,7 @@ void Game::StartOfProgram()
 
     // This makes the operating system's mouse pointer invisible
     // It's usually best to use your own instead.
-    HtMouse::instance.SetPointerVisiblity(false);
+    HtMouse::instance.SetPointerVisiblity(true);
 }
 
 // Use this function to intialise your game objects and load any assets
