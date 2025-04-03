@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "Adventurer.h"
 #include "Background.h"
+#include "Enemy.h"
 
 /*
 TODO List:
@@ -39,7 +40,9 @@ void Game::StartOfGame()
     Adventurer* player = new Adventurer();
     player->initialise();
     ObjectManager::instance.AddItem(player);
-
+    Enemy* enemy = new Enemy();
+    enemy->initialise();
+    ObjectManager::instance.AddItem(enemy);
 
 }
 
