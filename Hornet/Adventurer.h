@@ -15,5 +15,6 @@ private:
     Circle2D m_collisionShape;
     Vector2D m_velocity;
     PlayerReticle* m_reticle;
+    bool prepLaunch;
 };
 

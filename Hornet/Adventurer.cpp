@@ -24,17 +24,29 @@ void Adventurer::Update(double frametime)
     
     m_position += m_velocity * frametime;
 
-    Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
-    m_angle = direction.angle();
     if (HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
         m_velocity.setBearing(m_angle, PLAYER_SPEED);
     }
     if (!HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
         m_velocity = Vector2D(0,0);
     }
-    /*if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
+    if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
+        m_reticle->Activate(true);
+        prepLaunch = true;
         Attack();
-    }*/
+    }
+
+    if (!HtMouse::instance.IsMouseDown(HtMouseButton::LEFT))
+    {
+        prepLaunch = false;
+        m_reticle->Activate(false);
+    }
+    if (prepLaunch)
+    {
+        Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
+        m_angle = direction.angle() + 180;
+    }
+
     HtCamera::instance.PlaceAt(m_position);
     m_collisionShape.PlaceAt(m_position, 40);
     m_reticle->setPosition(m_position);
@@ -42,6 +54,7 @@ void Adventurer::Update(double frametime)
 
 void Adventurer::initialise()
 {
+    prepLaunch = false;
     m_reticle = new PlayerReticle();
     m_reticle->initialise();
     ObjectManager::instance.AddItem(m_reticle);
