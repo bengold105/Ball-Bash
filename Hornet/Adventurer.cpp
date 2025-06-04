@@ -24,12 +24,15 @@ void Adventurer::Update(double frametime)
     
     m_position += m_velocity * frametime;
 
+    /*old movement code
     if (HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
         m_velocity.setBearing(m_angle, PLAYER_SPEED);
     }
     if (!HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
         m_velocity = Vector2D(0,0);
-    }
+    }*/
+
+
     if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
         m_reticle->Activate(true);
         prepLaunch = true;

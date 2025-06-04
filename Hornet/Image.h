@@ -1,18 +1,18 @@
 #pragma once
 #include "GameObject.h"
-#include "Image.h"
-class PlayerReticle : public GameObject
+class Image : public GameObject
 {
 public:
-    PlayerReticle();
+    Image(const char* image);
     void Update(double frametime) override;
     void initialise();
     void setPosition(Vector2D& position);
     void setAngle(double angle);
+    void setScale(double scale);
+    double getScale();
     void Activate(bool activate);
     bool isActivated();
 private:
-    Image* directionTriangle;
     bool activated;
 };
 
