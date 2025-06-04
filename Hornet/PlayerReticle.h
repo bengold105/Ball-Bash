@@ -11,8 +11,10 @@ public:
     void setAngle(double angle);
     void Activate(bool activate);
     bool isActivated();
+    void setForceVector(Vector2D force);
 private:
     Image* directionTriangle;
     bool activated;
+    Vector2D m_force;
 };
 

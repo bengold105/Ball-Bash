@@ -11,9 +11,11 @@ public:
     void ProcessCollision(GameObject& other) override;
     IShape2D& GetCollisionShape() override;
     void Attack();
+    void Launch();
 private:
     Circle2D m_collisionShape;
     Vector2D m_velocity;
+    Vector2D mouseMovement;
     PlayerReticle* m_reticle;
     bool prepLaunch;
 };

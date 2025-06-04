@@ -6,8 +6,8 @@
 const double MAX_FORCE = 500;
 const double MIN_RETICLE_SCALE = 1.43;
 const double MAX_RETICLE_SCALE = 2.5;
-const double MIN_TRIANGLE_SCALE = 1.1;
-const double MAX_TRIANGLE_SCALE = 1.5 + MIN_TRIANGLE_SCALE;
+const double MIN_TRIANGLE_SCALE = 1.2;
+const double MAX_TRIANGLE_SCALE = 1.4 + MIN_TRIANGLE_SCALE;
 const double RETICLE_SCALE_FACTOR = 6;
 
 PlayerReticle::PlayerReticle() : GameObject(ObjectType::RETICLE)
@@ -18,7 +18,7 @@ PlayerReticle::PlayerReticle() : GameObject(ObjectType::RETICLE)
 void PlayerReticle::Update(double frametime)
 {
     Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
-    double force = direction.magnitude();
+    double force = m_force.magnitude();
     if (force > MAX_FORCE) {
         force = MAX_FORCE;
     }
@@ -79,5 +79,10 @@ void PlayerReticle::Activate(bool isActive)
 bool PlayerReticle::isActivated()
 {
     return activated;
+}
+
+void PlayerReticle::setForceVector(Vector2D force)
+{
+    m_force = force;
 }
 

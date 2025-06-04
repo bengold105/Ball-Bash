@@ -6,13 +6,10 @@
 #include "ObjectManager.h"
 #include "Enemy.h"
 #include <iostream>
+#include <cmath>
 
-const double FORWARD = 0;
-const double BACKWARD = 180;
-const double LEFT = 270;
-const double RIGHT = 90;
-const double PLAYER_SPEED = 300;
 const double ATTACK_REACH = 150;
+const double MAX_LAUNCH_POWER = 500;
 
 Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
 {
@@ -21,8 +18,16 @@ Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
 
 void Adventurer::Update(double frametime)
 {
-    
+    Vector2D friction = -m_velocity;
+    m_velocity += friction * frametime;
+    if (m_velocity.magnitude() < 100) {
+        m_velocity += 2 * friction * frametime; 
+    }
+    if (m_velocity.magnitude() < 10) {
+        m_velocity = Vector2D(0, 0);
+    }
     m_position += m_velocity * frametime;
+
 
     /*old movement code
     if (HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
@@ -32,8 +37,12 @@ void Adventurer::Update(double frametime)
         m_velocity = Vector2D(0,0);
     }*/
 
+    Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
 
     if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
+        HtMouse::instance.GetMouseMoveX();
+        HtMouse::instance.GetMouseMoveY();
+        mouseMovement = Vector2D(0, 0);
         m_reticle->Activate(true);
         prepLaunch = true;
         Attack();
@@ -41,13 +50,18 @@ void Adventurer::Update(double frametime)
 
     if (!HtMouse::instance.IsMouseDown(HtMouseButton::LEFT))
     {
+        if (prepLaunch)
+        {
+            Launch();
+        }
         prepLaunch = false;
         m_reticle->Activate(false);
     }
     if (prepLaunch)
     {
-        Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
+        mouseMovement += Vector2D(HtMouse::instance.GetMouseMoveX(), HtMouse::instance.GetMouseMoveY());
         m_angle = direction.angle() + 180;
+        m_reticle->setForceVector(mouseMovement);
     }
 
     HtCamera::instance.PlaceAt(m_position);
@@ -100,4 +114,13 @@ void Adventurer::Attack()
         event.objectList.push_back(enemy);
     }
     ObjectManager::instance.HandleEvent(event);
+}
+
+void Adventurer::Launch()
+{
+    double launchPower = mouseMovement.magnitude();
+    if (launchPower > MAX_LAUNCH_POWER) {
+        launchPower = MAX_LAUNCH_POWER;
+    }
+    m_velocity.setBearing(m_angle, launchPower*6);
 }
