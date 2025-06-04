@@ -18,31 +18,9 @@ PlayerReticle::PlayerReticle() : GameObject(ObjectType::RETICLE)
 void PlayerReticle::Update(double frametime)
 {
     Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
-    double force = m_force.magnitude();
-    if (force > MAX_FORCE) {
-        force = MAX_FORCE;
-    }
-
-    if (activated)
-    {
-        if (m_scale < MAX_RETICLE_SCALE) {
-            m_scale += RETICLE_SCALE_FACTOR * frametime;
-        } 
-        directionTriangle->setScale(force / MAX_FORCE * (MAX_TRIANGLE_SCALE - MIN_TRIANGLE_SCALE) + MIN_TRIANGLE_SCALE);
-    }
-    else
-    {
-        if (m_scale > MIN_RETICLE_SCALE) {
-            m_scale -= RETICLE_SCALE_FACTOR * frametime;
-        }
-
-        if (directionTriangle->getScale() > MIN_RETICLE_SCALE) {
-            directionTriangle->setScale(directionTriangle->getScale() - RETICLE_SCALE_FACTOR * frametime);
-        }
-        else {
-            directionTriangle->setScale(0);
-        }
-    }
+    
+    ScaleReticle(frametime);
+    
 
 
     directionTriangle->setPosition(m_position);
@@ -61,12 +39,12 @@ void PlayerReticle::initialise()
     
 }
 
-void PlayerReticle::setPosition(Vector2D& position)
+void PlayerReticle::SetPosition(Vector2D& position)
 {
     m_position = position;
 }
 
-void PlayerReticle::setAngle(double angle)
+void PlayerReticle::SetAngle(double angle)
 {
     m_angle = angle;
 }
@@ -76,13 +54,42 @@ void PlayerReticle::Activate(bool isActive)
     activated = isActive;
 }
 
-bool PlayerReticle::isActivated()
+bool PlayerReticle::IsActivated()
 {
     return activated;
 }
 
-void PlayerReticle::setForceVector(Vector2D force)
+void PlayerReticle::SetForceVector(Vector2D force)
 {
     m_force = force;
+}
+
+void PlayerReticle::ScaleReticle(double frametime)
+{
+    double force = m_force.magnitude();
+    if (force > MAX_FORCE) {
+        force = MAX_FORCE;
+    }
+
+    if (activated)
+    {
+        if (m_scale < MAX_RETICLE_SCALE) {
+            m_scale += RETICLE_SCALE_FACTOR * frametime;
+        }
+        directionTriangle->setScale(force / MAX_FORCE * (MAX_TRIANGLE_SCALE - MIN_TRIANGLE_SCALE) + MIN_TRIANGLE_SCALE);
+    }
+    else
+    {
+        if (m_scale > MIN_RETICLE_SCALE) {
+            m_scale -= RETICLE_SCALE_FACTOR * frametime;
+        }
+
+        if (directionTriangle->getScale() > MIN_RETICLE_SCALE) {
+            directionTriangle->setScale(directionTriangle->getScale() - RETICLE_SCALE_FACTOR * frametime);
+        }
+        else {
+            directionTriangle->setScale(0);
+        }
+    }
 }
 

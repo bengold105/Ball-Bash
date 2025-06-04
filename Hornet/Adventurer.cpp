@@ -18,34 +18,22 @@ Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
 
 void Adventurer::Update(double frametime)
 {
-    Vector2D friction = -m_velocity;
-    m_velocity += friction * frametime;
-    if (m_velocity.magnitude() < 100) {
-        m_velocity += 2 * friction * frametime; 
-    }
-    if (m_velocity.magnitude() < 10) {
-        m_velocity = Vector2D(0, 0);
-    }
-    m_position += m_velocity * frametime;
+    //locks the controls until the player has slowed down enough
+    lockedControls = true;
 
-
-    /*old movement code
-    if (HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
-        m_velocity.setBearing(m_angle, PLAYER_SPEED);
-    }
-    if (!HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
-        m_velocity = Vector2D(0,0);
-    }*/
+    UpdateMovement(frametime);
 
     Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
 
-    if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
-        HtMouse::instance.GetMouseMoveX();
-        HtMouse::instance.GetMouseMoveY();
-        mouseMovement = Vector2D(0, 0);
-        m_reticle->Activate(true);
-        prepLaunch = true;
-        Attack();
+    if (!lockedControls) {
+        if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
+            HtMouse::instance.GetMouseMoveX();
+            HtMouse::instance.GetMouseMoveY();
+            mouseMovement = Vector2D(0, 0);
+            m_reticle->Activate(true);
+            prepLaunch = true;
+            Attack();
+        }
     }
 
     if (!HtMouse::instance.IsMouseDown(HtMouseButton::LEFT))
@@ -61,16 +49,17 @@ void Adventurer::Update(double frametime)
     {
         mouseMovement += Vector2D(HtMouse::instance.GetMouseMoveX(), HtMouse::instance.GetMouseMoveY());
         m_angle = direction.angle() + 180;
-        m_reticle->setForceVector(mouseMovement);
+        m_reticle->SetForceVector(mouseMovement);
     }
 
     HtCamera::instance.PlaceAt(m_position);
     m_collisionShape.PlaceAt(m_position, 40);
-    m_reticle->setPosition(m_position);
+    m_reticle->SetPosition(m_position);
 }
 
 void Adventurer::initialise()
 {
+    lockedControls = false;
     prepLaunch = false;
     m_reticle = new PlayerReticle();
     m_reticle->initialise();
@@ -123,4 +112,18 @@ void Adventurer::Launch()
         launchPower = MAX_LAUNCH_POWER;
     }
     m_velocity.setBearing(m_angle, launchPower*6);
+}
+
+void Adventurer::UpdateMovement(double frametime)
+{
+    Vector2D friction = -m_velocity;
+    m_velocity += friction * frametime;
+    if (m_velocity.magnitude() < 100) {
+        m_velocity += 2 * friction * frametime;
+        lockedControls = false;
+    }
+    if (m_velocity.magnitude() < 10) {
+        m_velocity = Vector2D(0, 0);
+    }
+    m_position += m_velocity * frametime;
 }
