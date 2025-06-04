@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "PlayerReticle.h"
 class Adventurer :
     public GameObject
 {
@@ -13,5 +14,6 @@ public:
 private:
     Circle2D m_collisionShape;
     Vector2D m_velocity;
+    PlayerReticle* m_reticle;
 };
 

@@ -13,5 +13,6 @@ public:
 private:
     Circle2D m_collisionShape;
     Vector2D m_velocity;
+    Vector2D m_acceleration;
 };
 

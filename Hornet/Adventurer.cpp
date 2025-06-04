@@ -11,7 +11,7 @@ const double FORWARD = 0;
 const double BACKWARD = 180;
 const double LEFT = 270;
 const double RIGHT = 90;
-const double PLAYER_SPEED = 200;
+const double PLAYER_SPEED = 300;
 const double ATTACK_REACH = 150;
 
 Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
@@ -32,19 +32,23 @@ void Adventurer::Update(double frametime)
     if (!HtKeyboard::instance.KeyPressed(SDL_SCANCODE_W)) {
         m_velocity = Vector2D(0,0);
     }
-    if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
+    /*if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
         Attack();
-    }
+    }*/
     HtCamera::instance.PlaceAt(m_position);
     m_collisionShape.PlaceAt(m_position, 40);
+    m_reticle->setPosition(m_position);
 }
 
 void Adventurer::initialise()
 {
-    m_scale = 1.5;
+    m_reticle = new PlayerReticle();
+    m_reticle->initialise();
+    ObjectManager::instance.AddItem(m_reticle);
+    m_scale = 2;
     m_position = Vector2D(0, 0);
     m_velocity = Vector2D(0, 0);
-    LoadImage("assets/placeholderplayer.png");
+    LoadImage("assets/newplaceholderplayer.png");
     m_collisionShape = Circle2D(m_position, 40);
     IsCollidable();
 }
