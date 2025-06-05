@@ -5,6 +5,7 @@
 #include "Background.h"
 #include "Enemy.h"
 #include "Tile.h"
+#include "LevelLoader.h"
 
 /*
 TODO List:
@@ -38,19 +39,12 @@ void Game::StartOfGame()
     Background* background = new Background();
     background->initialise();
     ObjectManager::instance.AddItem(background);
-    Adventurer* player = new Adventurer();
+    /*Adventurer* player = new Adventurer();
     player->Initialise();
-    ObjectManager::instance.AddItem(player);
-    Tile* tile = new Tile(ObjectType::WALL);
-    tile->Initialise("assets/bricks.png", Vector2D(512, 0), 0, 6);
-    tile->SetDimensions(64, 64);
-    ObjectManager::instance.AddItem(tile);
-    /*
-    Enemy* enemy = new Enemy();
-    enemy->initialise();
-    ObjectManager::instance.AddItem(enemy);
-    */
-
+    ObjectManager::instance.AddItem(player);*/
+    LevelLoader* levelLoader = new LevelLoader();
+    levelLoader->LoadLevel(1);
+    delete levelLoader;
 }
 
 // Function runs each frame.
@@ -102,6 +96,7 @@ void Game::EndOfGame()
 
     //This line automatically deletes all managed objects
     ObjectManager::instance.DeleteAllObjects();
+    
 }
 
 void Game::EndOfProgram()

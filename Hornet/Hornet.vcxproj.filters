@@ -115,6 +115,9 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Game\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Game\Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HtAudio.h">
@@ -195,8 +198,8 @@
     <ClInclude Include="Tile.h">
       <Filter>Game\Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\bricksx64.png" />
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Game\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

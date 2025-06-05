@@ -53,7 +53,7 @@ void Adventurer::Update(double frametime)
     }
 
     HtCamera::instance.PlaceAt(m_position);
-    m_collisionShape.PlaceAt(m_position, 40);
+    m_collisionShape.PlaceAt(m_position, 64);
     m_reticle->SetPosition(m_position);
 }
 
@@ -67,16 +67,43 @@ void Adventurer::Initialise()
     m_position = Vector2D(0, 0);
     m_velocity = Vector2D(0, 0);
     LoadImage("assets/newplaceholderplayer.png");
-    m_collisionShape = Circle2D(m_position, 40);
+    m_collisionShape = Circle2D(m_position, 92);
+    SetCollidable();
+}
+
+void Adventurer::Initialise(Vector2D spawn)
+{
+    SetDrawDepth(9);
+    m_reticle = new PlayerReticle();
+    m_reticle->Initialise();
+    ObjectManager::instance.AddItem(m_reticle);
+    m_position = spawn;
+    m_scale = 2;
+    m_velocity = Vector2D(0, 0);
+    LoadImage("assets/newplaceholderplayer.png");
+    m_collisionShape = Circle2D(m_position, 92);
     SetCollidable();
 }
 
 void Adventurer::ProcessCollision(GameObject& other)
 {
-    if (other.GetType() == ObjectType::WALL && lastCollidedObject != &other) {
-        Vector2D normal = (m_position - other.GetPosition()).unitVector();
+    if (other.GetType() == ObjectType::WALL  && lastCollidedObject != &other) {
+        // calculate the surface normal for collision on walls
+        Vector2D normal;
+        double x = m_position.XValue - other.GetPosition().XValue;
+        double y = m_position.YValue - other.GetPosition().YValue;
+        double absX = std::abs(x);
+        double absY = std::abs(y);
+        if (absX > absY) {
+            normal = Vector2D((x > 0) ? 1.0 : -1.0, 0.0);
+        }
+        else {
+            normal = Vector2D(0.0, (y > 0) ? 1.0 : -1.0);
+        }
+
         m_velocity = m_velocity - (normal * (m_velocity* normal * 2));
         lastCollidedObject = &other;
+        
     }
     
 

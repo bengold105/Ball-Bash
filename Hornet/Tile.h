@@ -10,6 +10,7 @@ public:
     IShape2D& GetCollisionShape() override;
     void ProcessCollision(GameObject& other) override;
     void Render() override;
+    void RenderDebug() override;
 private:
     Rectangle2D m_collisionShape;
     int m_width;

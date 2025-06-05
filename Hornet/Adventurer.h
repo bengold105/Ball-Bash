@@ -8,6 +8,7 @@ public:
     Adventurer();
     void Update(double frametime) override;
     void Initialise();
+    void Initialise(Vector2D spawn);
     void ProcessCollision(GameObject& other) override;
     IShape2D& GetCollisionShape() override;
     void Attack();

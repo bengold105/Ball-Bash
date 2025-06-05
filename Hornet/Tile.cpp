@@ -2,6 +2,8 @@
 #include "HtCamera.h"
 #include "HtGraphics.h"
 #include <iostream>
+#include "Adventurer.h"
+#include "ObjectManager.h"
 
 Tile::Tile(ObjectType type) : GameObject(type)
 {
@@ -20,6 +22,12 @@ void Tile::Initialise(const char* image, Vector2D position, double angle, double
     if (GetType() == ObjectType::WALL)
     {
         SetCollidable();
+    }
+    if (GetType() == ObjectType::SPAWNPOINT)
+    {
+        Adventurer* player = new Adventurer();
+        player->Initialise(m_position);
+        ObjectManager::instance.AddItem(player);
     }
 }
 
@@ -58,5 +66,16 @@ void Tile::Render()
     if (tileArea.Intersects(cameraArea))
     {
         HtGraphics::instance.DrawAt(m_position, m_images[0], m_scale, m_angle);
+    }
+}
+
+void Tile::RenderDebug()
+{
+    if (IsCollidable())
+    {
+        GameObject::RenderDebug();
+        GameObject::AddDebugLine("width: ", m_width);
+        GameObject::AddDebugLine("height: ", m_height);
+        AddDebugLine("Type:", "COLLISION_TILE");
     }
 }

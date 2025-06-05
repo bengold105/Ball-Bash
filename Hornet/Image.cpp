@@ -5,9 +5,7 @@ Image::Image(const char* image) : GameObject(ObjectType::IMAGE)
 {
    LoadImage(image);
    activated = false;
-   m_position = Vector2D(0, 0);
-   m_angle = 0;
-   m_scale = 1.0;
+   SetDrawDepth(8);
 }
 
 void Image::Update(double frametime)
@@ -16,6 +14,9 @@ void Image::Update(double frametime)
 
 void Image::initialise()
 {
+    m_position = Vector2D(0, 0);
+    m_angle = 0;
+    m_scale = 1.0;
     if (m_images.size() == 0) {
         std::cerr << "Image not loaded properly!" << std::endl;
     }
