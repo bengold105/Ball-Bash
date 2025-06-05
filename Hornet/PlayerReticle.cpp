@@ -5,13 +5,14 @@
 
 const double MAX_FORCE = 500;
 const double MIN_RETICLE_SCALE = 1.43;
-const double MAX_RETICLE_SCALE = 2.5;
-const double MIN_TRIANGLE_SCALE = 1.2;
-const double MAX_TRIANGLE_SCALE = 1.4 + MIN_TRIANGLE_SCALE;
+const double MAX_RETICLE_SCALE = 3;
+const double MIN_TRIANGLE_SCALE = 1.4;
+const double MAX_TRIANGLE_SCALE = 1.7 + MIN_TRIANGLE_SCALE;
 const double RETICLE_SCALE_FACTOR = 6;
 
 PlayerReticle::PlayerReticle() : GameObject(ObjectType::RETICLE)
 {
+    SetDrawDepth(8);
     activated = false;
 }
 
@@ -27,7 +28,7 @@ void PlayerReticle::Update(double frametime)
     directionTriangle->setAngle(direction.angle() + 180); 
 }
 
-void PlayerReticle::initialise()
+void PlayerReticle::Initialise()
 {
     LoadImage("assets/UICircle.png");
     directionTriangle = new Image("assets/UITriangle.png");

@@ -11,9 +11,11 @@
 const double ATTACK_REACH = 150;
 const double MAX_LAUNCH_POWER = 500;
 
-Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
+Adventurer::Adventurer() : GameObject(ObjectType::PLAYER) 
 {
-
+    m_reticle = nullptr;
+    lockedControls = false;
+    prepLaunch = false;
 }
 
 void Adventurer::Update(double frametime)
@@ -57,12 +59,11 @@ void Adventurer::Update(double frametime)
     m_reticle->SetPosition(m_position);
 }
 
-void Adventurer::initialise()
+void Adventurer::Initialise()
 {
-    lockedControls = false;
-    prepLaunch = false;
+    SetDrawDepth(9);
     m_reticle = new PlayerReticle();
-    m_reticle->initialise();
+    m_reticle->Initialise();
     ObjectManager::instance.AddItem(m_reticle);
     m_scale = 2;
     m_position = Vector2D(0, 0);

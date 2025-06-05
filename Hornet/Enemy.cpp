@@ -35,8 +35,9 @@ void Enemy::Update(double frametime)
 
 }
 
-void Enemy::initialise()
+void Enemy::Initialise()
 {
+    SetDrawDepth(9);
     m_scale = 1.5;
     m_position = Vector2D(100, 100);
     m_velocity = Vector2D(0, 0);

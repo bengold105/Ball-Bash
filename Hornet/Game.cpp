@@ -28,7 +28,7 @@ void Game::StartOfProgram()
 
     // This makes the operating system's mouse pointer invisible
     // It's usually best to use your own instead.
-    HtMouse::instance.SetPointerVisiblity(true);
+    HtMouse::instance.SetPointerVisiblity(false);
 }
 
 // Use this function to intialise your game objects and load any assets
@@ -38,7 +38,7 @@ void Game::StartOfGame()
     background->initialise();
     ObjectManager::instance.AddItem(background);
     Adventurer* player = new Adventurer();
-    player->initialise();
+    player->Initialise();
     ObjectManager::instance.AddItem(player);
     /*
     Enemy* enemy = new Enemy();

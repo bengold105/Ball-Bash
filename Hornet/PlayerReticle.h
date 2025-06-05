@@ -6,7 +6,7 @@ class PlayerReticle : public GameObject
 public:
     PlayerReticle();
     void Update(double frametime) override;
-    void initialise();
+    void Initialise();
     //sets object position
     void SetPosition(Vector2D& position);
     //sets object angle

@@ -6,7 +6,7 @@ class Enemy :
 public:
     Enemy();
     void Update(double frametime) override;
-    void initialise();
+    void Initialise();
     void ProcessCollision(GameObject& other) override;
     IShape2D& GetCollisionShape() override;
     void HandleEvent(Event evt) override;
