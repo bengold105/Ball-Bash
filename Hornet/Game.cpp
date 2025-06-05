@@ -4,6 +4,7 @@
 #include "Adventurer.h"
 #include "Background.h"
 #include "Enemy.h"
+#include "Tile.h"
 
 /*
 TODO List:
@@ -28,7 +29,7 @@ void Game::StartOfProgram()
 
     // This makes the operating system's mouse pointer invisible
     // It's usually best to use your own instead.
-    HtMouse::instance.SetPointerVisiblity(false);
+    HtMouse::instance.SetPointerVisiblity(true);
 }
 
 // Use this function to intialise your game objects and load any assets
@@ -40,6 +41,10 @@ void Game::StartOfGame()
     Adventurer* player = new Adventurer();
     player->Initialise();
     ObjectManager::instance.AddItem(player);
+    Tile* tile = new Tile(ObjectType::WALL);
+    tile->Initialise("assets/bricks.png", Vector2D(512, 0), 0, 6);
+    tile->SetDimensions(64, 64);
+    ObjectManager::instance.AddItem(tile);
     /*
     Enemy* enemy = new Enemy();
     enemy->initialise();

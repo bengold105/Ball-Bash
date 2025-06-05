@@ -14,6 +14,7 @@ const double MAX_LAUNCH_POWER = 500;
 Adventurer::Adventurer() : GameObject(ObjectType::PLAYER) 
 {
     m_reticle = nullptr;
+    lastCollidedObject = nullptr;
     lockedControls = false;
     prepLaunch = false;
 }
@@ -29,9 +30,7 @@ void Adventurer::Update(double frametime)
 
     if (!lockedControls) {
         if (HtMouse::instance.IsNewMouseDown(HtMouseButton::LEFT)) {
-            HtMouse::instance.GetMouseMoveX();
-            HtMouse::instance.GetMouseMoveY();
-            mouseMovement = Vector2D(0, 0);
+            HtMouse::instance.SetPointerPosition(852, 548);
             m_reticle->Activate(true);
             prepLaunch = true;
             Attack();
@@ -49,9 +48,8 @@ void Adventurer::Update(double frametime)
     }
     if (prepLaunch)
     {
-        mouseMovement += Vector2D(HtMouse::instance.GetMouseMoveX(), HtMouse::instance.GetMouseMoveY());
-        m_angle = direction.angle() + 180;
-        m_reticle->SetForceVector(mouseMovement);
+        m_angle =  direction.angle() + 180;
+        m_reticle->SetForceVector(direction);
     }
 
     HtCamera::instance.PlaceAt(m_position);
@@ -70,11 +68,19 @@ void Adventurer::Initialise()
     m_velocity = Vector2D(0, 0);
     LoadImage("assets/newplaceholderplayer.png");
     m_collisionShape = Circle2D(m_position, 40);
-    IsCollidable();
+    SetCollidable();
 }
 
 void Adventurer::ProcessCollision(GameObject& other)
 {
+    if (other.GetType() == ObjectType::WALL && lastCollidedObject != &other) {
+        Vector2D normal = (m_position - other.GetPosition()).unitVector();
+        m_velocity = m_velocity - (normal * (m_velocity* normal * 2));
+        lastCollidedObject = &other;
+    }
+    
+
+
 }
 
 IShape2D& Adventurer::GetCollisionShape()
@@ -108,7 +114,8 @@ void Adventurer::Attack()
 
 void Adventurer::Launch()
 {
-    double launchPower = mouseMovement.magnitude();
+    Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
+    double launchPower = direction.magnitude();
     if (launchPower > MAX_LAUNCH_POWER) {
         launchPower = MAX_LAUNCH_POWER;
     }
@@ -121,10 +128,11 @@ void Adventurer::UpdateMovement(double frametime)
     m_velocity += friction * frametime;
     if (m_velocity.magnitude() < 100) {
         m_velocity += 2 * friction * frametime;
-        lockedControls = false;
     }
     if (m_velocity.magnitude() < 10) {
         m_velocity = Vector2D(0, 0);
+        lockedControls = false;
+        lastCollidedObject = nullptr;
     }
     m_position += m_velocity * frametime;
 }

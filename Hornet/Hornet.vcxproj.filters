@@ -196,4 +196,7 @@
       <Filter>Game\Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\bricksx64.png" />
+  </ItemGroup>
 </Project>

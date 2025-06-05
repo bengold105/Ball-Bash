@@ -1,6 +1,7 @@
 #include "Tile.h"
 #include "HtCamera.h"
 #include "HtGraphics.h"
+#include <iostream>
 
 Tile::Tile(ObjectType type) : GameObject(type)
 {
@@ -45,6 +46,7 @@ IShape2D& Tile::GetCollisionShape()
 
 void Tile::ProcessCollision(GameObject& other)
 {
+    
 }
 
 void Tile::Render()
