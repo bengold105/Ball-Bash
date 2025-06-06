@@ -1,9 +1,14 @@
 #include "LevelLoader.h"
 #include "Tile.h"
 #include "ObjectManager.h"
+#include <iostream>
 
 const int tileDimension = 64;
 const int tileScale = 6;
+
+
+//add speedup pads, periodical projectile cannons, 
+
 
 LevelLoader::LevelLoader()
 {
@@ -14,8 +19,8 @@ bool LevelLoader::LoadLevel(int level)
     int level1Data[5][5] = {
         {1, 1, 1, 1, 1},
         {1, 2, 2, 2, 1},
+        {1, 3, 2, 2, 1},
         {1, 2, 2, 2, 1},
-        {1, 2, 3, 2, 1},
         {1, 1, 1, 1, 1}
     };
 

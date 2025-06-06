@@ -6,20 +6,16 @@
 #include "Enemy.h"
 #include "Tile.h"
 #include "LevelLoader.h"
+#include "GameManager.h"
 
 /*
 TODO List:
-- tiled dungeon
-use a config file with the tile as a list of numbers
-- attacks
-make them part of the player class
-use closest objects and vectors to figure out if the enemy is in front and attackable, then add animations and effects
-- move to mouse pointer
-watch chris's video
-- enemy pathing (diagonals)
-use getclosestobject and then vectors to determine the directional movement
-- minimap 
-use objectmanager list of objects and their position, scaled down to show a minimap (draw objects as dots)
+- add sound effects
+- add obstacles
+- add level transition
+- add level end
+- add UI
+- polish levels
 */
 
 
@@ -42,9 +38,16 @@ void Game::StartOfGame()
     /*Adventurer* player = new Adventurer();
     player->Initialise();
     ObjectManager::instance.AddItem(player);*/
+
+    /*ObjectManager::instance.SetCurrentScene(1);
     LevelLoader* levelLoader = new LevelLoader();
     levelLoader->LoadLevel(1);
-    delete levelLoader;
+    delete levelLoader;*/
+
+    GameManager* gameManager = new GameManager();
+    gameManager->Initialise();
+    ObjectManager::instance.AddItem(gameManager);
+    gameManager->startGame();
 }
 
 // Function runs each frame.
@@ -90,9 +93,7 @@ void Game::OnResume()
 
 // You can use this to clear up any memory, if needed
 void Game::EndOfGame()
-{
-
-
+{    
 
     //This line automatically deletes all managed objects
     ObjectManager::instance.DeleteAllObjects();
