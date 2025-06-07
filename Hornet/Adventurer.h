@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "PlayerReticle.h"
+#include "HtAudio.h"
 class Adventurer :
     public GameObject
 {
@@ -15,6 +16,7 @@ public:
     void Launch();
     void UpdateMovement(double frametime);
 private:
+    SoundIndex ballBounce;
     Circle2D m_collisionShape;
     Vector2D m_velocity;
     PlayerReticle* m_reticle;

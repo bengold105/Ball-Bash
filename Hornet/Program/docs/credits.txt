@@ -59,6 +59,17 @@ UICircle.png by Ben Goldstein
 
 UITriangle.png by Ben Goldstein
 
+floortile.png by Ben Goldstein
+
+floortile-finish.png by Ben Goldstein
+
 bricks.png by alpha_rats from OpenGameArt.org
 https://opengameart.org/content/bricks-tiled-texture-64x64
+
+ball-bounce.mp3 by martinezfabricio612 from Pixabay
+https://pixabay.com/sound-effects/bouncing-ball-sfx-215265/
+
+tada.mp3 by plasterbrain from Pixabay
+https://pixabay.com/sound-effects/tada-fanfare-a-6313/
+
 

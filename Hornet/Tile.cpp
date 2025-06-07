@@ -29,6 +29,10 @@ void Tile::Initialise(const char* image, Vector2D position, double angle, double
         player->Initialise(m_position);
         ObjectManager::instance.AddItem(player);
     }
+    if (GetType() == ObjectType::LEVELEND)
+    {
+        SetCollidable();
+    }
 }
 
 void Tile::Update(double frametime)
@@ -39,10 +43,17 @@ void Tile::SetDimensions(int width, int height)
 {
     m_width = static_cast<int>(width * m_scale);
     m_height = static_cast<int>(height * m_scale);
-    if (IsCollidable())
+    if (IsCollidable() && GetType() == ObjectType::WALL)
     {
         Vector2D bottomLeft(m_position.XValue - (m_width / 2), m_position.YValue - (m_width / 2));
         Vector2D topRight(m_position.XValue + (m_height / 2), m_position.YValue + (m_height / 2));
+        m_collisionShape.PlaceAt(bottomLeft, topRight);
+    }
+    if (IsCollidable() && GetType() == ObjectType::LEVELEND)
+    { 
+        //smaller hitbox for level end tiles
+        Vector2D bottomLeft(m_position.XValue - (m_width / 4), m_position.YValue - (m_height / 4));
+        Vector2D topRight(m_position.XValue + (m_width / 4), m_position.YValue + (m_height / 4));
         m_collisionShape.PlaceAt(bottomLeft, topRight);
     }
 }

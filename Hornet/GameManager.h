@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 #include "LevelLoader.h"
+#include "HtAudio.h"
+#include "HtGraphics.h"
 class GameManager : public GameObject
 {
 public:
@@ -20,7 +22,11 @@ private:
     void DisplayLives();
     void DisplayTip();
     void DisplayEndScreen();
+    void DisplayLevelComplete();
 
+    Vector2D cameraPosition;
+    SoundIndex levelCompleteSound;
+    bool levelComplete;
     int m_levelNumber;
     int m_score;
     int m_playerLaunches;

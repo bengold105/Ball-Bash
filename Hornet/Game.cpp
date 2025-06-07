@@ -10,10 +10,12 @@
 
 /*
 TODO List:
-- add sound effects
+- add sound effects /
 - add obstacles
-- add level transition
-- add level end
+- add level transition /
+- add level end /
+- add level end sound when level ends
+- make level transition smoother
 - add UI
 - polish levels
 */

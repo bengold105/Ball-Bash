@@ -33,7 +33,6 @@ void Adventurer::Update(double frametime)
             HtMouse::instance.SetPointerPosition(852, 548);
             m_reticle->Activate(true);
             prepLaunch = true;
-            Attack();
         }
     }
 
@@ -59,7 +58,7 @@ void Adventurer::Update(double frametime)
 
 void Adventurer::Initialise()
 {
-    SetDrawDepth(9);
+    SetDrawDepth(3);
     m_reticle = new PlayerReticle();
     m_reticle->Initialise();
     ObjectManager::instance.AddItem(m_reticle);
@@ -68,6 +67,7 @@ void Adventurer::Initialise()
     m_velocity = Vector2D(0, 0);
     LoadImage("assets/newplaceholderplayer.png");
     m_collisionShape = Circle2D(m_position, 92);
+    ballBounce = NO_SOUND_INDEX;
     SetCollidable();
 }
 
@@ -87,7 +87,8 @@ void Adventurer::Initialise(Vector2D spawn)
 
 void Adventurer::ProcessCollision(GameObject& other)
 {
-    if (other.GetType() == ObjectType::WALL  && lastCollidedObject != &other) {
+    ObjectType collidedType = other.GetType();
+    if (collidedType == ObjectType::WALL && lastCollidedObject != &other) {
         // calculate the surface normal for collision on walls
         Vector2D normal;
         double x = m_position.XValue - other.GetPosition().XValue;
@@ -103,9 +104,19 @@ void Adventurer::ProcessCollision(GameObject& other)
 
         m_velocity = m_velocity - (normal * (m_velocity* normal * 2));
         lastCollidedObject = &other;
-        
+        ballBounce = HtAudio::instance.LoadSound("assets/ball-bounce.mp3");
+        int channel = HtAudio::instance.Play(ballBounce);
+        //volume scales with current velocity
+        HtAudio::instance.SetChannelVolume(channel, m_velocity.magnitude()/(MAX_LAUNCH_POWER*6));
     }
     
+    if (collidedType == ObjectType::LEVELEND && !lockedControls) {
+        Event event = Event();
+        event.pSource = this;
+        event.type = LEVELEND;
+        ObjectManager::instance.HandleEvent(event);
+        Deactivate();
+    }
 
 
 }

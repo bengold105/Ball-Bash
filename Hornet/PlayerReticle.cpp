@@ -12,7 +12,7 @@ const double RETICLE_SCALE_FACTOR = 6;
 
 PlayerReticle::PlayerReticle() : GameObject(ObjectType::RETICLE)
 {
-    SetDrawDepth(8);
+    SetDrawDepth(3);
     activated = false;
 }
 
