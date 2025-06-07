@@ -19,9 +19,6 @@ public:
     void EndGame();
 private:
 
-    void DisplayLaunches();
-    void DisplayLives();
-    void DisplayTip();
     void DisplayEndScreen();
     void DisplayLevelComplete();
     void DisplayGameOver();

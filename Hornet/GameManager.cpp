@@ -123,49 +123,6 @@ void GameManager::EndGame()
 
 }
 
-void GameManager::DisplayLaunches()
-{
-    HtGraphics::instance.WriteTextAligned(
-        1000,
-        1000,
-        "Launches: ",
-        HtGraphics::WHITE,
-        0,
-        1.25
-    );
-    HtGraphics::instance.WriteIntAligned(
-        1200,
-        1000,
-        m_playerLaunches,
-        HtGraphics::WHITE,
-        0,
-        1.25
-    );
-}
-
-void GameManager::DisplayLives()
-{
-    HtGraphics::instance.WriteTextAligned(
-        -1000,
-        -1000,
-        "Lives: ",
-        HtGraphics::WHITE,
-        0,
-        1.25
-    );
-    HtGraphics::instance.WriteIntAligned(
-        -1200,
-        -1000,
-        m_playerLives,
-        HtGraphics::WHITE,
-        0,
-        1.25
-    );
-}
-
-void GameManager::DisplayTip()
-{
-}
 
 void GameManager::DisplayEndScreen()
 {
