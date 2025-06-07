@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include <iostream>
 #include <cmath>
+#include "Explosion.h"
 
 const double ATTACK_REACH = 150;
 const double MAX_LAUNCH_POWER = 500;
@@ -17,6 +18,12 @@ Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
     lastCollidedObject = nullptr;
     lockedControls = false;
     prepLaunch = false;
+}
+
+Adventurer::~Adventurer()
+{
+    m_reticle->Deactivate();
+    m_reticle = nullptr;
 }
 
 void Adventurer::Update(double frametime)
@@ -118,6 +125,13 @@ void Adventurer::ProcessCollision(GameObject& other)
         Deactivate();
     }
 
+    if (collidedType == ObjectType::SPIKES) {
+        Explosion* explosion = new Explosion();
+        explosion->Initialise(m_position, true);
+        ObjectManager::instance.AddItem(explosion);
+        m_reticle->Deactivate();
+        Deactivate();
+    }
 
 }
 

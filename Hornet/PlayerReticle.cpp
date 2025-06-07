@@ -16,6 +16,12 @@ PlayerReticle::PlayerReticle() : GameObject(ObjectType::RETICLE)
     activated = false;
 }
 
+PlayerReticle::~PlayerReticle()
+{
+    directionTriangle->Deactivate();
+    directionTriangle = nullptr;
+}
+
 void PlayerReticle::Update(double frametime)
 {
     Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;

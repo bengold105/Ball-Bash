@@ -10,6 +10,7 @@ private:
     void LoadFloor(int x, int y);
     void LoadSpawnPoint(int x, int y);
     void LoadLevelEnd(int x, int y);
+    void LoadSpikes(int x, int y, double angle);
 
 };
 

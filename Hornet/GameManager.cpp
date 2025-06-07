@@ -18,6 +18,7 @@ void GameManager::Initialise()
     m_levelLoader = nullptr;
     SetHandleEvents();
     levelCompleteSound = NO_SOUND_INDEX;
+    renderer = nullptr;
 }
 
 void GameManager::Update(double frametime)
@@ -30,17 +31,40 @@ void GameManager::Update(double frametime)
             levelComplete = false;
         }
     }
+
+    if (playerDead && m_playerLives > 0) {
+        //loads the next level when enter is pressed
+        if (HtKeyboard::instance.KeyPressed(SDL_SCANCODE_RETURN)) {
+            SetSceneNumber(m_levelNumber);
+            ObjectManager::instance.SetCurrentScene(m_levelNumber);
+            ObjectManager::instance.DeleteInactiveItems();
+            SetLevel(m_levelNumber);
+            playerDead = false;
+        }
+    }
+
+    if (renderer != nullptr)
+    {
+        renderer->setLaunches(m_playerLaunches);
+        renderer->setLives(m_playerLives);
+    }
 }
 
 void GameManager::startGame()
 {
+    SetSceneNumber(1);
+    ObjectManager::instance.SetCurrentScene(1);
     SetLevel(1);
 }
 
 void GameManager::Render()
 {
-    if (levelComplete) {
+    if (levelComplete && !playerDead) {
         DisplayLevelComplete();
+    }
+    if (playerDead)
+    {
+        DisplayGameOver();
     }
 }
 
@@ -58,23 +82,40 @@ void GameManager::HandleEvent(Event evt)
         SetSceneNumber(m_levelNumber);
         ObjectManager::instance.SetCurrentScene(m_levelNumber);
     }
+    
+    if(evt.type == EventType::PLAYERDEAD)
+    {
+        m_playerLives--;
+        playerDead = true;
+        SetSceneNumber(-1);
+        ObjectManager::instance.SetCurrentScene(-1);
+    }
 }
 
 void GameManager::SetPlayerLaunches(int launch)
 {
+    m_playerLaunches = launch;
 }
 
 void GameManager::SetPlayerLives(int lives)
 {
+    m_playerLaunches = lives;
 }
 
 void GameManager::SetLevel(int levelNumber)
 {
+    if (renderer != nullptr) {
+        renderer->Deactivate();
+        renderer = nullptr;
+    }
     m_levelLoader = new LevelLoader();
     m_levelLoader->LoadLevel(m_levelNumber);
     delete m_levelLoader;
     m_levelLoader = nullptr;
     ObjectManager::instance.DeleteInactiveItems();
+    renderer = new UIRenderer();
+    renderer->Initialise(m_playerLives, m_playerLaunches, m_levelNumber);
+    ObjectManager::instance.AddItem(renderer);
 }
 
 void GameManager::EndGame()
@@ -84,10 +125,42 @@ void GameManager::EndGame()
 
 void GameManager::DisplayLaunches()
 {
+    HtGraphics::instance.WriteTextAligned(
+        1000,
+        1000,
+        "Launches: ",
+        HtGraphics::WHITE,
+        0,
+        1.25
+    );
+    HtGraphics::instance.WriteIntAligned(
+        1200,
+        1000,
+        m_playerLaunches,
+        HtGraphics::WHITE,
+        0,
+        1.25
+    );
 }
 
 void GameManager::DisplayLives()
 {
+    HtGraphics::instance.WriteTextAligned(
+        -1000,
+        -1000,
+        "Lives: ",
+        HtGraphics::WHITE,
+        0,
+        1.25
+    );
+    HtGraphics::instance.WriteIntAligned(
+        -1200,
+        -1000,
+        m_playerLives,
+        HtGraphics::WHITE,
+        0,
+        1.25
+    );
 }
 
 void GameManager::DisplayTip()
@@ -117,4 +190,70 @@ void GameManager::DisplayLevelComplete()
         0.0,
         2.0
     );
+}
+
+void GameManager::DisplayGameOver()
+{
+
+    if (m_playerLives > 0) {
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 300),
+            "You have died and have " + std::to_string(m_playerLives) + " lives left",
+            HtGraphics::WHITE,
+            0,
+            0.0,
+            3.0
+        );
+
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 100),
+            "Press Enter to continue",
+            HtGraphics::GREY,
+            0,
+            0.0,
+            2.0
+        );
+    }
+    
+    if (m_playerLives == 1) {
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 300),
+            "You have died and have 1 life left",
+            HtGraphics::WHITE,
+            0,
+            0.0,
+            3.0
+        );
+
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 100),
+            "Press Enter to continue",
+            HtGraphics::GREY,
+            0,
+            0.0,
+            2.0
+        );
+    }
+    
+    if (m_playerLives <= 0) {
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 300),
+            "You have died and have 0 lives left",
+            HtGraphics::WHITE,
+            0,
+            0.0,
+            4.0
+        );
+
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 100),
+            "Press Escape to exit the game",
+            HtGraphics::GREY,
+            0,
+            0.0,
+            3.0
+        );
+    }
+
+    
 }

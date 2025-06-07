@@ -2,6 +2,7 @@
 #include "Tile.h"
 #include "ObjectManager.h"
 #include <iostream>
+#include "Spikes.h"
 
 const int tileDimension = 64;
 const int tileScale = 6;
@@ -19,7 +20,7 @@ bool LevelLoader::LoadLevel(int level)
     int level1Data[5][5] = {
         {1, 1, 1, 1, 1},
         {1, 2, 2, 2, 1},
-        {1, 3, 2, 4, 1},
+        {1, 3, 2, 5, 1},
         {1, 2, 2, 2, 1},
         {1, 1, 1, 1, 1}
     };
@@ -60,6 +61,22 @@ bool LevelLoader::LoadLevel(int level)
                     LoadLevelEnd(x, y);
                     break;
                 }
+                case 5: {
+                    LoadFloor(x, y);
+                    double angle = 0;
+                    if (level1Data[x-1][y] == 1) {
+                        angle = 90;
+                    }else if (level1Data[x + 1][y] == 1) {
+                        angle = 270;
+                    }
+                    else if (level1Data[x][y - 1] == 1) {
+                        angle = 0;
+                    }
+                    else if (level1Data[x][y + 1] == 1) {
+                        angle = 180;
+                    }
+                    LoadSpikes(x, y, angle);
+                }
                 default:
                     break;
                 }
@@ -90,6 +107,23 @@ bool LevelLoader::LoadLevel(int level)
                     // Load level end
                     LoadLevelEnd(x, y);
                     break;
+                }
+                case 5: {
+                    LoadFloor(x, y);
+                    double angle = 0;
+                    if (level1Data[x - 1][y] == 1) {
+                        angle = 90;
+                    }
+                    else if (level1Data[x + 1][y] == 1) {
+                        angle = 270;
+                    }
+                    else if (level1Data[x][y - 1] == 1) {
+                        angle = 0;
+                    }
+                    else if (level1Data[x][y + 1] == 1) {
+                        angle = 180;
+                    }
+                    LoadSpikes(x, y, angle);
                 }
                 default:
                     break;
@@ -138,4 +172,12 @@ void LevelLoader::LoadLevelEnd(int x, int y)
     tile->Initialise("assets/floortile-finish.png", Vector2D(x * tileDimension * tileScale, y * tileDimension * tileScale), 0, tileScale);
     tile->SetDimensions(tileDimension, tileDimension);
     ObjectManager::instance.AddItem(tile);
+}
+
+void LevelLoader::LoadSpikes(int x, int y, double angle)
+{
+    Spikes* spikes = new Spikes();
+    spikes->Initialise("assets/spikes.png", Vector2D(x * tileDimension * tileScale, y * tileDimension * tileScale), angle, tileScale);
+    spikes->SetDimensions(tileDimension, tileDimension);
+    ObjectManager::instance.AddItem(spikes);
 }

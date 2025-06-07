@@ -5,6 +5,7 @@ class PlayerReticle : public GameObject
 {
 public:
     PlayerReticle();
+    ~PlayerReticle();
     void Update(double frametime) override;
     void Initialise();
     //sets object position

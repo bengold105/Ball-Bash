@@ -63,6 +63,8 @@ floortile.png by Ben Goldstein
 
 floortile-finish.png by Ben Goldstein
 
+spikes.png by Ben Goldstein
+
 bricks.png by alpha_rats from OpenGameArt.org
 https://opengameart.org/content/bricks-tiled-texture-64x64
 

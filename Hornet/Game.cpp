@@ -81,7 +81,7 @@ void Game::Update(double frametime)
 // You may want to stop sound effects.
 void Game::OnSuspend()
 {
-
+    HtAudio::instance.StopAllChannels();
 }
 
 

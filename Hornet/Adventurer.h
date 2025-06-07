@@ -7,6 +7,7 @@ class Adventurer :
 {
 public:
     Adventurer();
+    ~Adventurer();
     void Update(double frametime) override;
     void Initialise();
     void Initialise(Vector2D spawn);

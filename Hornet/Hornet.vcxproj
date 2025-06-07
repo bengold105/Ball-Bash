@@ -145,6 +145,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ErrorLogger.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -164,7 +165,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Shapes.cpp" />
+    <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="UIRenderer.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +177,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ErrorLogger.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
@@ -194,7 +198,9 @@
     <ClInclude Include="objecttypes.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="Shapes.h" />
+    <ClInclude Include="Spikes.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="UIRenderer.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
