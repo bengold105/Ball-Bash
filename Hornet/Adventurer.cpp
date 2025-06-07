@@ -140,29 +140,6 @@ IShape2D& Adventurer::GetCollisionShape()
     return m_collisionShape;
 }
 
-void Adventurer::Attack()
-{
-    std::vector<GameObject*> enemiesAttacked;
-    for (GameObject* enemy : ObjectManager::instance.GetAllObjectsOfType(ObjectType::ENEMY)) {
-        Vector2D link = m_position - enemy->GetPosition();
-        double linkAngle = link.angle() + 180;
-        if (linkAngle > 360) {
-            linkAngle -= 360;
-        }
-        std::cout << "enemy distance: " << link.magnitude() << std::endl << "vector angle: " << linkAngle << std::endl << "player angle: " << m_angle << std::endl;
-        if ((link.magnitude() <= ATTACK_REACH) and ((linkAngle) > m_angle - 67) and ((linkAngle) < m_angle + 67)) {
-            enemiesAttacked.push_back(enemy);
-            std::cout << "enemy hit, distance: " << link.magnitude() << std::endl;
-        }
-    }
-    Event event = Event();
-    event.pSource = this;
-    event.type = PLAYERATTACK;
-    for (GameObject* enemy : enemiesAttacked) {
-        event.objectList.push_back(enemy);
-    }
-    ObjectManager::instance.HandleEvent(event);
-}
 
 void Adventurer::Launch()
 {
@@ -172,6 +149,11 @@ void Adventurer::Launch()
         launchPower = MAX_LAUNCH_POWER;
     }
     m_velocity.setBearing(m_angle, launchPower*6);
+
+    Event event = Event();
+    event.pSource = this;
+    event.type = PLAYERLAUNCHED;
+    ObjectManager::instance.HandleEvent(event);
 }
 
 void Adventurer::UpdateMovement(double frametime)

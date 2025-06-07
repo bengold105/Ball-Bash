@@ -81,6 +81,7 @@ void GameManager::HandleEvent(Event evt)
         m_levelNumber++;
         SetSceneNumber(m_levelNumber);
         ObjectManager::instance.SetCurrentScene(m_levelNumber);
+        ObjectManager::instance.DeactivateScene(m_levelNumber - 1);
     }
     
     if(evt.type == EventType::PLAYERDEAD)
@@ -89,6 +90,14 @@ void GameManager::HandleEvent(Event evt)
         playerDead = true;
         SetSceneNumber(-1);
         ObjectManager::instance.SetCurrentScene(-1);
+        ObjectManager::instance.DeactivateScene(m_levelNumber);
+    }
+
+    if (evt.type == EventType::PLAYERLAUNCHED) {
+        m_playerLaunches++;
+        if (renderer != nullptr) {
+            renderer->setLaunches(m_playerLaunches);
+        }
     }
 }
 
@@ -152,7 +161,7 @@ void GameManager::DisplayLevelComplete()
 void GameManager::DisplayGameOver()
 {
 
-    if (m_playerLives > 0) {
+    if (m_playerLives > 0 && m_playerLives != 1) {
         HtGraphics::instance.WriteTextCentered(
             Vector2D(cameraPosition.XValue, cameraPosition.YValue + 300),
             "You have died and have " + std::to_string(m_playerLives) + " lives left",

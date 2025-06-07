@@ -13,7 +13,6 @@ public:
     void Initialise(Vector2D spawn);
     void ProcessCollision(GameObject& other) override;
     IShape2D& GetCollisionShape() override;
-    void Attack();
     void Launch();
     void UpdateMovement(double frametime);
 private:
