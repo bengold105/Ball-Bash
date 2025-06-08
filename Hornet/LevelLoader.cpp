@@ -20,8 +20,8 @@ bool LevelLoader::LoadLevel(int level)
     int level1Data[5][5] = {
         {1, 1, 1, 1, 1},
         {1, 2, 2, 2, 1},
-        {1, 3, 2, 5, 1},
-        {1, 2, 2, 2, 1},
+        {1, 3, 2, 4, 1},
+        {1, 2, 5, 2, 1},
         {1, 1, 1, 1, 1}
     };
     int level2Data[5][5] = {

@@ -29,6 +29,7 @@ void GameManager::Update(double frametime)
         if (HtKeyboard::instance.KeyPressed(SDL_SCANCODE_RETURN)) {
             SetLevel(m_levelNumber);
             levelComplete = false;
+            m_playerLaunches = 0;
         }
     }
 
@@ -82,6 +83,7 @@ void GameManager::HandleEvent(Event evt)
         SetSceneNumber(m_levelNumber);
         ObjectManager::instance.SetCurrentScene(m_levelNumber);
         ObjectManager::instance.DeactivateScene(m_levelNumber - 1);
+        totalLaunches += m_playerLaunches;
     }
     
     if(evt.type == EventType::PLAYERDEAD)
@@ -141,7 +143,7 @@ void GameManager::DisplayLevelComplete()
 {
     HtGraphics::instance.WriteTextCentered(
         Vector2D(cameraPosition.XValue, cameraPosition.YValue + 300),
-        "Level Complete",
+        "Level Completed with " + std::to_string(m_playerLaunches) + " launches",
         HtGraphics::WHITE,
         0,
         0.0,

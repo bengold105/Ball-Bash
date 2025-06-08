@@ -23,6 +23,7 @@ private:
     void DisplayLevelComplete();
     void DisplayGameOver();
 
+    int totalLaunches;
     UIRenderer* renderer;
     Vector2D cameraPosition;
     SoundIndex levelCompleteSound;
