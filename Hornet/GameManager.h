@@ -29,6 +29,7 @@ private:
     SoundIndex levelCompleteSound;
     bool levelComplete;
     bool playerDead;
+    bool endGame;
     int m_levelNumber;
     int m_score;
     int m_playerLaunches;

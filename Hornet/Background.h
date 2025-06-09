@@ -6,6 +6,7 @@ class Background :
 public:
     Background();
     void initialise();
+    void initialise(const char* image);
     void Update(double frametime) override;
 };
 

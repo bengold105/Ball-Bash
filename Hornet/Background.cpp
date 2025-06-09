@@ -12,6 +12,13 @@ void Background::initialise()
     SetDrawDepth(-1);
 }
 
+void Background::initialise(const char* image)
+{
+    m_scale = 10;
+    LoadImage(image);
+    SetDrawDepth(-1);
+}
+
 void Background::Update(double frametime)
 {
     m_position = HtCamera::instance.GetCameraCentre(Vector2D(0, 0));
