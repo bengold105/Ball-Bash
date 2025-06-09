@@ -6,6 +6,10 @@
 #include "Background.h"
 
 const int LEVEL_COUNT = 7;
+const int MAX_LIVES = 5;
+const int LAUNCH_MULTIPLIER = 100;
+const int BASE_LEVEL_SCORE = 1000;
+const int STARTING_LEVEL = 1;
 
 GameManager::GameManager() : GameObject(ObjectType::GAMEMANAGER)
 {
@@ -14,10 +18,10 @@ GameManager::GameManager() : GameObject(ObjectType::GAMEMANAGER)
 void GameManager::Initialise()
 {
     levelComplete = false;
-    m_levelNumber = 7;
+    m_levelNumber = STARTING_LEVEL;
     m_score = 0;
     m_playerLaunches = 0;
-    m_playerLives = 3;
+    m_playerLives = MAX_LIVES;
     m_levelLoader = nullptr;
     SetHandleEvents();
     levelCompleteSound = NO_SOUND_INDEX;
@@ -43,7 +47,6 @@ void GameManager::Update(double frametime)
         if (HtKeyboard::instance.NewKeyPressed(SDL_SCANCODE_RETURN)) {
             SetSceneNumber(m_levelNumber);
             ObjectManager::instance.SetCurrentScene(m_levelNumber);
-            //ObjectManager::instance.DeactivateScene(0);
             ObjectManager::instance.DeleteInactiveItems();
             SetLevel(m_levelNumber);
             playerDead = false;
@@ -93,11 +96,11 @@ void GameManager::HandleEvent(Event evt)
         ObjectManager::instance.SetCurrentScene(0);
         ObjectManager::instance.DeactivateScene(m_levelNumber - 1);
         totalLaunches += m_playerLaunches;
-        if ((1000 - (m_playerLaunches * 100)) > 0 && m_levelNumber - 1 < 6) {
-            m_score += 1000 - (m_playerLaunches * 100);
+        if ((BASE_LEVEL_SCORE - (m_playerLaunches * LAUNCH_MULTIPLIER)) > 0 && m_levelNumber - 1 < 6) {
+            m_score += BASE_LEVEL_SCORE - (m_playerLaunches * LAUNCH_MULTIPLIER);
         }
-        else if (2000 - (m_playerLaunches * 100) > 0) {
-            m_score += 2000 - (m_playerLaunches * 100);
+        else if (BASE_LEVEL_SCORE*2 - (m_playerLaunches * LAUNCH_MULTIPLIER) > 0) {
+            m_score += BASE_LEVEL_SCORE*2 - (m_playerLaunches * LAUNCH_MULTIPLIER);
         }
         if (ObjectManager::instance.GetAllObjectsOfType(ObjectType::BACKGROUND).empty())
         {

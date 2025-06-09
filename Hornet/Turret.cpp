@@ -3,6 +3,9 @@
 #include "Projectile.h"
 #include "ObjectManager.h"
 
+const double TIMER_SPEED = 3.5;
+const double RELOAD_TIME = 2.0;
+
 Turret::Turret() : GameObject(ObjectType::TURRET)
 {
     SetDrawDepth(4);
@@ -25,11 +28,11 @@ void Turret::Initialise(Vector2D position, double angle, double scale)
 void Turret::Update(double frametime)
 {
     if (reloading) {
-        m_timer += 3.5*frametime;
+        m_timer += TIMER_SPEED*frametime;
         m_reloadTimer += frametime;
     }
     
-    if (m_reloadTimer >= 2) // Example reload time
+    if (m_reloadTimer >= RELOAD_TIME) // Example reload time
     {
         reloading = false;
         m_reloadTimer = 0;

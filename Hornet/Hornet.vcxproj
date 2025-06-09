@@ -142,7 +142,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Angle.cpp" />
     <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ErrorLogger.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Explosion.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Angle.h" />
     <ClInclude Include="Background.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="ErrorLogger.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="Explosion.h" />
@@ -206,6 +204,9 @@
     <ClInclude Include="Turret.h" />
     <ClInclude Include="UIRenderer.h" />
     <ClInclude Include="Vector2D.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -42,7 +42,7 @@ void PlayerReticle::Initialise()
     ObjectManager::instance.AddItem(directionTriangle);
     directionTriangle->setPosition(m_position);
     directionTriangle->setScale(0);
-    m_scale = 1.43;
+    m_scale = MIN_RETICLE_SCALE;
     
 }
 

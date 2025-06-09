@@ -4,7 +4,6 @@
 #include "HtMouse.h"
 #include "HtGraphics.h"
 #include "ObjectManager.h"
-#include "Enemy.h"
 #include <iostream>
 #include <cmath>
 #include "Explosion.h"

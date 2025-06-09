@@ -1,8 +1,8 @@
 #pragma once
-#include "GameObject.h"
+#include "Tile.h"
 
 
-class Spikes : public GameObject
+class Spikes : public Tile
 {
 public:
     Spikes();

@@ -1,18 +1,8 @@
 #include "Game.h"
 #include "HtCamera.h"
 #include "ObjectManager.h"
-#include "Player.h"
-#include "Background.h"
-#include "Enemy.h"
-#include "Tile.h"
-#include "LevelLoader.h"
 #include "GameManager.h"
 
-/*
-TODO List:
-- polish levels !!!
-- remove magic numbers !!!
-*/
 
 
 void Game::StartOfProgram()

@@ -2,7 +2,7 @@
 #include "HtCamera.h"
 #include <iostream>
 
-Spikes::Spikes() : GameObject(ObjectType::SPIKES)
+Spikes::Spikes() : Tile(ObjectType::SPIKES)
 {
     SetDrawDepth(2);
 }
