@@ -73,6 +73,10 @@ BoostpadA1-5.png made by Ben Goldstein
 
 cannonball.png made by Ben Goldstein
 
+spacebackground.png made by Ben Goldstein
+
+transition-background.png made by Ben Goldstein
+
 bricks.png by alpha_rats from OpenGameArt.org
 https://opengameart.org/content/bricks-tiled-texture-64x64
 
