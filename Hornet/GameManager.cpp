@@ -5,7 +5,7 @@
 #include "HtCamera.h"
 #include "Background.h"
 
-const int LEVEL_COUNT = 4;
+const int LEVEL_COUNT = 7;
 
 GameManager::GameManager() : GameObject(ObjectType::GAMEMANAGER)
 {
@@ -14,7 +14,7 @@ GameManager::GameManager() : GameObject(ObjectType::GAMEMANAGER)
 void GameManager::Initialise()
 {
     levelComplete = false;
-    m_levelNumber = 1;
+    m_levelNumber = 7;
     m_score = 0;
     m_playerLaunches = 0;
     m_playerLives = 3;
@@ -93,8 +93,11 @@ void GameManager::HandleEvent(Event evt)
         ObjectManager::instance.SetCurrentScene(0);
         ObjectManager::instance.DeactivateScene(m_levelNumber - 1);
         totalLaunches += m_playerLaunches;
-        if ((1000 - (m_playerLaunches * 100)) > 0) {
+        if ((1000 - (m_playerLaunches * 100)) > 0 && m_levelNumber - 1 < 6) {
             m_score += 1000 - (m_playerLaunches * 100);
+        }
+        else if (2000 - (m_playerLaunches * 100) > 0) {
+            m_score += 2000 - (m_playerLaunches * 100);
         }
         if (ObjectManager::instance.GetAllObjectsOfType(ObjectType::BACKGROUND).empty())
         {
@@ -278,8 +281,17 @@ void GameManager::DisplayGameOver()
         );
 
         HtGraphics::instance.WriteTextCentered(
-            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 100),
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue + 150),
             "Press Escape to exit the game",
+            HtGraphics::BLACK,
+            0,
+            0.0,
+            3.0
+        );
+
+        HtGraphics::instance.WriteTextCentered(
+            Vector2D(cameraPosition.XValue, cameraPosition.YValue),
+            "Final Score: " + std::to_string(m_score),
             HtGraphics::BLACK,
             0,
             0.0,

@@ -11,7 +11,6 @@
 /*
 TODO List:
 - polish levels !!!
-- add level logic: scoring
 - remove magic numbers !!!
 */
 

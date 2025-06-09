@@ -16,6 +16,12 @@ const int LEVEL_3_DIMENSION_X = 16;
 const int LEVEL_3_DIMENSION_Y = 16;
 const int LEVEL_4_DIMENSION_X = 16;
 const int LEVEL_4_DIMENSION_Y = 16;
+const int LEVEL_5_DIMENSION_X = 16;
+const int LEVEL_5_DIMENSION_Y = 16;
+const int LEVEL_6_DIMENSION_X = 16;
+const int LEVEL_6_DIMENSION_Y = 16;
+const int LEVEL_7_DIMENSION_X = 16;
+const int LEVEL_7_DIMENSION_Y = 16;
 
 LevelLoader::LevelLoader()
 {
@@ -98,6 +104,63 @@ bool LevelLoader::LoadLevel(int level)
        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  
        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  
        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+
+    int level5Data[LEVEL_5_DIMENSION_X][LEVEL_5_DIMENSION_Y] = {
+       {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 11, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 7, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 11, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 11, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 2, 4, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},  
+       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+
+    int level6Data[LEVEL_6_DIMENSION_X][LEVEL_6_DIMENSION_Y] = {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {1, 3, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 8, 1, 0},
+        {1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 0},
+        {1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 5, 2, 2, 2, 1, 0},
+        {1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 0},
+        {1, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2, 1, 0},
+        {1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 2, 1, 0},
+        {1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 5, 2, 2, 1, 0},
+        {1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 0},
+        {1, 2, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 0},
+        {1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 0},
+        {1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0},
+        {1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0},
+        {1, 2, 8, 1, 2, 2, 2, 2, 2, 12, 1, 2, 2, 4, 1, 0},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+
+    int level7Data[LEVEL_7_DIMENSION_X][LEVEL_7_DIMENSION_Y] = {
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},  
+        {1, 6, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 7, 1},  
+        {1, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 2, 7, 1},  
+        {1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1},  
+        {1, 2, 11, 1, 6, 2, 2, 2, 2, 2, 2, 7, 1, 2, 2, 1},  
+        {1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 7, 7, 1},  
+        {1, 2, 2, 1, 2, 2, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1},  
+        {1, 2, 11, 1, 2, 2, 1, 6, 2, 2, 1, 2, 1, 2, 2, 1},  
+        {1, 2, 2, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1},  
+        {1, 2, 2, 1, 2, 2, 1, 2, 1, 4, 1, 2, 1, 2, 2, 1},  
+        {1, 9, 9, 1, 2, 2, 1, 2, 1, 1, 1, 2, 1, 2, 2, 1},  
+        {1, 2, 2, 1, 2, 2, 1, 9, 2, 2, 2, 8, 1, 2, 2, 1},  
+        {1, 2, 11, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1},  
+        {1, 2, 2, 1, 11, 2, 2, 2, 2, 8, 2, 2, 2, 2, 2, 1},  
+        {1, 3, 2, 1, 2, 2, 2, 2, 2, 8, 2, 2, 2, 2, 10, 1},  
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
         
 
@@ -615,6 +678,411 @@ bool LevelLoader::LoadLevel(int level)
         }
         return true;
     } break;
+    case 5: {
+        Background* background = new Background();
+        background->initialise();
+        ObjectManager::instance.AddItem(background);
+        // Load level 1 data
+        for (int x = 0; x < LEVEL_5_DIMENSION_X; x++) {
+            for (int y = 0; y < LEVEL_5_DIMENSION_Y; y++) {
+                switch (level5Data[x][y]) {
+                    //wall
+                case 1: {
+                    // Load wall
+                    LoadWall(x, y);
+                    break;
+                }
+                      //floor
+                case 2: {
+                    // Load floor
+                    LoadFloor(x, y);
+                    break;
+                }
+                      //player spawn
+                case 3: {
+                    // Load player spawn point
+                    LoadSpawnPoint(x, y);
+                    break;
+                }
+                      //finishline
+                case 4: {
+                    // Load level end
+                    LoadLevelEnd(x, y);
+                    break;
+                }
+                      //horizontal spikes
+                case 5: {
+                    LoadFloor(x, y);
+                    double angle = 0;
+                    if (level5Data[x - 1][y] == 1) {
+                        angle = 90;
+                    }
+                    else if (level5Data[x + 1][y] == 1) {
+                        angle = 270;
+                    }
+                    else if (level5Data[x][y - 1] == 1) {
+                        angle = 0;
+                    }
+                    else if (level5Data[x][y + 1] == 1) {
+                        angle = 180;
+                    }
+                    LoadSpikes(x, y, angle);
+                    break;
+                }
+                      //upboost
+                case 6: {
+                    LoadBoost(x, y, 0);
+                    break;
+                }
+                      //rightboost
+                case 7: {
+                    LoadBoost(x, y, 90);
+                    break;
+                }
+                      //downboost
+                case 8: {
+                    LoadBoost(x, y, 180);
+                    break;
+                }
+                      //leftboost
+                case 9: {
+                    LoadBoost(x, y, 270);
+                    break;
+                }
+                      //turret horizontal
+                case 10: {
+                    int angle = 0;
+                    if (level5Data[x - 1][y] == 1) {
+                        angle = 90;
+                    }
+                    else if (level5Data[x + 1][y] == 1) {
+                        angle = 270;
+                    }
+                    else if (level5Data[x][y - 1] == 1) {
+                        angle = 0;
+                    }
+                    else if (level5Data[x][y + 1] == 1) {
+                        angle = 180;
+                    }
+                    LoadFloor(x, y);
+                    LoadTurret(x, y, angle);
+                    break;
+                }
+                       //turret vertical
+                case 11: {
+                    int angle = 0;
+                    if (level5Data[x][y - 1] == 1) {
+                        angle = 0;
+                    }
+                    else if (level5Data[x][y + 1] == 1) {
+                        angle = 180;
+                    }
+                    else if (level5Data[x - 1][y] == 1) {
+                        angle = 90;
+                    }
+                    else if (level5Data[x + 1][y] == 1) {
+                        angle = 270;
+                    }
+                    LoadFloor(x, y);
+                    LoadTurret(x, y, angle);
+                    break;
+                }
+                       //vertical spikes
+                case 12: {
+                    LoadFloor(x, y);
+                    double angle = 0;
+                    if (level5Data[x][y - 1] == 1) {
+                        angle = 0;
+                    }
+                    else if (level5Data[x][y + 1] == 1) {
+                        angle = 180;
+                    }
+                    else if (level5Data[x - 1][y] == 1) {
+                        angle = 90;
+                    }
+                    else if (level5Data[x + 1][y] == 1) {
+                        angle = 270;
+                    }
+                    LoadSpikes(x, y, angle);
+                    break;
+                }
+                default:
+                    break;
+                }
+            }
+        }
+        return true;
+    } break;
+        case 6: {
+            Background* background = new Background();
+            background->initialise();
+            ObjectManager::instance.AddItem(background);
+            // Load level 1 data
+            for (int x = 0; x < LEVEL_6_DIMENSION_X; x++) {
+                for (int y = 0; y < LEVEL_6_DIMENSION_Y; y++) {
+                    switch (level6Data[x][y]) {
+                        //wall
+                    case 1: {
+                        // Load wall
+                        LoadWall(x, y);
+                        break;
+                    }
+                          //floor
+                    case 2: {
+                        // Load floor
+                        LoadFloor(x, y);
+                        break;
+                    }
+                          //player spawn
+                    case 3: {
+                        // Load player spawn point
+                        LoadSpawnPoint(x, y);
+                        break;
+                    }
+                          //finishline
+                    case 4: {
+                        // Load level end
+                        LoadLevelEnd(x, y);
+                        break;
+                    }
+                          //horizontal spikes
+                    case 5: {
+                        LoadFloor(x, y);
+                        double angle = 0;
+                        if (level6Data[x - 1][y] == 1) {
+                            angle = 90;
+                        }
+                        else if (level6Data[x + 1][y] == 1) {
+                            angle = 270;
+                        }
+                        else if (level6Data[x][y - 1] == 1) {
+                            angle = 0;
+                        }
+                        else if (level6Data[x][y + 1] == 1) {
+                            angle = 180;
+                        }
+                        LoadSpikes(x, y, angle);
+                        break;
+                    }
+                          //upboost
+                    case 6: {
+                        LoadBoost(x, y, 0);
+                        break;
+                    }
+                          //rightboost
+                    case 7: {
+                        LoadBoost(x, y, 90);
+                        break;
+                    }
+                          //downboost
+                    case 8: {
+                        LoadBoost(x, y, 180);
+                        break;
+                    }
+                          //leftboost
+                    case 9: {
+                        LoadBoost(x, y, 270);
+                        break;
+                    }
+                          //turret horizontal
+                    case 10: {
+                        int angle = 0;
+                        if (level6Data[x - 1][y] == 1) {
+                            angle = 90;
+                        }
+                        else if (level6Data[x + 1][y] == 1) {
+                            angle = 270;
+                        }
+                        else if (level6Data[x][y - 1] == 1) {
+                            angle = 0;
+                        }
+                        else if (level6Data[x][y + 1] == 1) {
+                            angle = 180;
+                        }
+                        LoadFloor(x, y);
+                        LoadTurret(x, y, angle);
+                        break;
+                    }
+                           //turret vertical
+                    case 11: {
+                        int angle = 0;
+                        if (level6Data[x][y - 1] == 1) {
+                            angle = 0;
+                        }
+                        else if (level6Data[x][y + 1] == 1) {
+                            angle = 180;
+                        }
+                        else if (level6Data[x - 1][y] == 1) {
+                            angle = 90;
+                        }
+                        else if (level6Data[x + 1][y] == 1) {
+                            angle = 270;
+                        }
+                        LoadFloor(x, y);
+                        LoadTurret(x, y, angle);
+                        break;
+                    }
+                           //vertical spikes
+                    case 12: {
+                        LoadFloor(x, y);
+                        double angle = 0;
+                        if (level6Data[x][y - 1] == 1) {
+                            angle = 0;
+                        }
+                        else if (level6Data[x][y + 1] == 1) {
+                            angle = 180;
+                        }
+                        else if (level6Data[x - 1][y] == 1) {
+                            angle = 90;
+                        }
+                        else if (level6Data[x + 1][y] == 1) {
+                            angle = 270;
+                        }
+                        LoadSpikes(x, y, angle);
+                        break;
+                    }
+                    default:
+                        break;
+                    }
+                }
+            }
+            return true;
+        } break;
+                case 7: {
+                    Background* background = new Background();
+                    background->initialise();
+                    ObjectManager::instance.AddItem(background);
+                    // Load level 1 data
+                    for (int x = 0; x < LEVEL_7_DIMENSION_X; x++) {
+                        for (int y = 0; y < LEVEL_7_DIMENSION_Y; y++) {
+                            switch (level7Data[x][y]) {
+                                //wall
+                            case 1: {
+                                // Load wall
+                                LoadWall(x, y);
+                                break;
+                            }
+                                  //floor
+                            case 2: {
+                                // Load floor
+                                LoadFloor(x, y);
+                                break;
+                            }
+                                  //player spawn
+                            case 3: {
+                                // Load player spawn point
+                                LoadSpawnPoint(x, y);
+                                break;
+                            }
+                                  //finishline
+                            case 4: {
+                                // Load level end
+                                LoadLevelEnd(x, y);
+                                break;
+                            }
+                                  //horizontal spikes
+                            case 5: {
+                                LoadFloor(x, y);
+                                double angle = 0;
+                                if (level7Data[x - 1][y] == 1) {
+                                    angle = 90;
+                                }
+                                else if (level7Data[x + 1][y] == 1) {
+                                    angle = 270;
+                                }
+                                else if (level7Data[x][y - 1] == 1) {
+                                    angle = 0;
+                                }
+                                else if (level7Data[x][y + 1] == 1) {
+                                    angle = 180;
+                                }
+                                LoadSpikes(x, y, angle);
+                                break;
+                            }
+                                  //upboost
+                            case 6: {
+                                LoadBoost(x, y, 0);
+                                break;
+                            }
+                                  //rightboost
+                            case 7: {
+                                LoadBoost(x, y, 90);
+                                break;
+                            }
+                                  //downboost
+                            case 8: {
+                                LoadBoost(x, y, 180);
+                                break;
+                            }
+                                  //leftboost
+                            case 9: {
+                                LoadBoost(x, y, 270);
+                                break;
+                            }
+                                  //turret horizontal
+                            case 10: {
+                                int angle = 0;
+                                if (level7Data[x - 1][y] == 1) {
+                                    angle = 90;
+                                }
+                                else if (level7Data[x + 1][y] == 1) {
+                                    angle = 270;
+                                }
+                                else if (level7Data[x][y - 1] == 1) {
+                                    angle = 0;
+                                }
+                                else if (level7Data[x][y + 1] == 1) {
+                                    angle = 180;
+                                }
+                                LoadFloor(x, y);
+                                LoadTurret(x, y, angle);
+                                break;
+                            }
+                                   //turret vertical
+                            case 11: {
+                                int angle = 0;
+                                if (level7Data[x][y - 1] == 1) {
+                                    angle = 0;
+                                }
+                                else if (level7Data[x][y + 1] == 1) {
+                                    angle = 180;
+                                }
+                                else if (level7Data[x - 1][y] == 1) {
+                                    angle = 90;
+                                }
+                                else if (level7Data[x + 1][y] == 1) {
+                                    angle = 270;
+                                }
+                                LoadFloor(x, y);
+                                LoadTurret(x, y, angle);
+                                break;
+                            }
+                                   //vertical spikes
+                            case 12: {
+                                LoadFloor(x, y);
+                                double angle = 0;
+                                if (level7Data[x][y - 1] == 1) {
+                                    angle = 0;
+                                }
+                                else if (level7Data[x][y + 1] == 1) {
+                                    angle = 180;
+                                }
+                                else if (level7Data[x - 1][y] == 1) {
+                                    angle = 90;
+                                }
+                                else if (level7Data[x + 1][y] == 1) {
+                                    angle = 270;
+                                }
+                                LoadSpikes(x, y, angle);
+                                break;
+                            }
+                            default:
+                                break;
+                            }
+                        }
+                    }
+                    return true;
+                } break;
     default:
         return false;
     }

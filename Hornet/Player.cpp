@@ -32,6 +32,13 @@ void Player::Update(double frametime)
     lockedControls = true;
 
     UpdateMovement(frametime);
+    if (soundPlayed) {
+        soundDelay += 6*frametime;
+    }
+    if(soundDelay > 1){
+        soundDelay = 0;
+        soundPlayed = false;
+    }
 
     Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
 
@@ -80,6 +87,8 @@ void Player::Initialise(Vector2D spawn)
     m_position = spawn;
     m_scale = 2;
     m_velocity = Vector2D(0, 0);
+    soundPlayed = false;
+    soundDelay = 0;
     LoadImage("assets/basketballA1.png");
     LoadImage("assets/basketballA2.png");
     LoadImage("assets/basketballA3.png");
@@ -114,10 +123,13 @@ void Player::ProcessCollision(GameObject& other)
 
         m_velocity = m_velocity - (normal * (m_velocity* normal * 2));
         lastCollidedObject = &other;
-        ballBounce = HtAudio::instance.LoadSound("assets/ball-bounce.mp3");
-        int channel = HtAudio::instance.Play(ballBounce);
-        //volume scales with current velocity
-        HtAudio::instance.SetChannelVolume(channel, m_velocity.magnitude()/(MAX_LAUNCH_POWER*6));
+        if (soundPlayed == false) {
+            ballBounce = HtAudio::instance.LoadSound("assets/ball-bounce.mp3");
+            int channel = HtAudio::instance.Play(ballBounce);
+            //volume scales with current velocity
+            HtAudio::instance.SetChannelVolume(channel, m_velocity.magnitude() / (MAX_LAUNCH_POWER * 6));
+            soundPlayed = true;
+        }
     }
     
     if (collidedType == ObjectType::LEVELEND && !lockedControls) {
@@ -152,6 +164,9 @@ void Player::ProcessCollision(GameObject& other)
             Vector2D boostDirection = Vector2D(0, 0);
             boostDirection.setBearing(dynamic_cast<Tile&>(other).GetAngle(), MAX_LAUNCH_POWER * 6);
             m_velocity += boostDirection;
+            if (m_velocity.magnitude() > MAX_LAUNCH_POWER * 6) {
+                m_velocity.setBearing(m_velocity.angle(), MAX_LAUNCH_POWER * 6);
+            }
             lastCollidedBoosts.push_back(&other);
             dynamic_cast<Tile&>(other).EnableBoost(false);
 

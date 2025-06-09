@@ -21,6 +21,7 @@ void Explosion::Initialise(Vector2D position, bool deadPlayer, int scale)
     playerDeath = deadPlayer;
     explosionSound = HtAudio::instance.LoadSound("assets/explosion1.wav");
     int channel = HtAudio::instance.Play(explosionSound);
+
     if (!playerDeath) {
         HtAudio::instance.SetChannelVolume(channel, 0.1); // Lower volume for player death explosion
     }

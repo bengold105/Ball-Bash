@@ -18,6 +18,8 @@ public:
     void UpdateMovement(double frametime);
     void EndLaunch();
 private:
+    bool soundPlayed;
+    double soundDelay;
     bool tutorialRemoved;
     double m_timer;
     SoundIndex ballBounce;
