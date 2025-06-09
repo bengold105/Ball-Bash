@@ -10,7 +10,7 @@ public:
     GameManager();
     void Initialise();
     void Update(double frametime) override;
-    void startGame();
+    void StartGame();
     void Render() override;
     void HandleEvent(Event evt) override;
     void SetPlayerLaunches(int launch);

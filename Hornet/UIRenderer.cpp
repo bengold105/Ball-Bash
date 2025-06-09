@@ -90,22 +90,22 @@ void UIRenderer::DisplayTip()
     );
 }
 
-void UIRenderer::setLives(int lives)
+void UIRenderer::SetLives(int lives)
 {
     m_lives = lives;
 }
 
-void UIRenderer::setLaunches(int launches)
+void UIRenderer::SetLaunches(int launches)
 {
     m_launches = launches;
 }
 
-void UIRenderer::setLevel(int level)
+void UIRenderer::SetLevel(int level)
 {
     m_currentLevel = level;
 }
 
-void UIRenderer::setDisplayHint(bool display)
+void UIRenderer::SetDisplayHint(bool display)
 {
     displayHint = display;
 }

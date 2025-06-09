@@ -11,7 +11,6 @@ public:
     IShape2D& GetCollisionShape() override;
     void ProcessCollision(GameObject& other) override;
     void Render() override;
-    void RenderDebug() override;
     void EnableBoost(bool enable);
 private:
     bool enableBoost;

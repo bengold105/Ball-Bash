@@ -10,10 +10,10 @@ public:
     void DisplayLaunches();
     void DisplayLives();
     void DisplayTip();
-    void setLives(int lives);
-    void setLaunches(int launches);
-    void setLevel(int level);
-    void setDisplayHint(bool display);
+    void SetLives(int lives);
+    void SetLaunches(int launches);
+    void SetLevel(int level);
+    void SetDisplayHint(bool display);
 private:
     bool displayHint;
     int m_currentLevel;

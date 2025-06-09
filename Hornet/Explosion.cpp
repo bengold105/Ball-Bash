@@ -6,7 +6,7 @@ Explosion::Explosion() : GameObject(ObjectType::EXPLOSION)
 
 }
 
-void Explosion::Initialise(Vector2D position, bool deadPlayer, int scale)
+void Explosion::Initialise(Vector2D position, bool deadPlayer, double scale)
 {
     m_timer = 0;
     m_position = position;

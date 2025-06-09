@@ -1,8 +1,6 @@
 #include "Player.h"
-#include "HtKeyboard.h"
 #include "HtCamera.h"
 #include "HtMouse.h"
-#include "HtGraphics.h"
 #include "ObjectManager.h"
 #include <iostream>
 #include <cmath>

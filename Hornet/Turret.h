@@ -7,9 +7,9 @@ public:
     void Initialise(Vector2D position, double angle, double scale);
     void Update(double frametime) override;
     void Render() override;
-    void Shoot();
 
 private:
+    void Shoot();
     bool reloading;
     double m_timer;
     double m_reloadTimer;

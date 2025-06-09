@@ -22,7 +22,7 @@ void Game::StartOfGame()
     GameManager* gameManager = new GameManager();
     gameManager->Initialise();
     ObjectManager::instance.AddItem(gameManager);
-    gameManager->startGame();
+    gameManager->StartGame();
 }
 
 // Function runs each frame.

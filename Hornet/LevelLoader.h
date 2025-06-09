@@ -3,7 +3,6 @@ class LevelLoader
 {
 public:
     LevelLoader();
-    // Load a level from a file (1, 2 or 3)
     bool LoadLevel(int level);
 private:
     void LoadWall(int x, int y);

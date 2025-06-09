@@ -5,7 +5,7 @@ class Explosion : public GameObject
 {
 public:
     Explosion();
-    void Initialise(Vector2D position, bool deadPlayer, int scale);
+    void Initialise(Vector2D position, bool deadPlayer, double scale);
     void Update(double frametime) override;
     
 private:

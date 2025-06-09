@@ -55,12 +55,12 @@ void GameManager::Update(double frametime)
 
     if (renderer != nullptr)
     {
-        renderer->setLaunches(m_playerLaunches);
-        renderer->setLives(m_playerLives);
+        renderer->SetLaunches(m_playerLaunches);
+        renderer->SetLives(m_playerLives);
     }
 }
 
-void GameManager::startGame()
+void GameManager::StartGame()
 {
     SetSceneNumber(1);
     ObjectManager::instance.SetCurrentScene(1);
@@ -129,14 +129,14 @@ void GameManager::HandleEvent(Event evt)
     if (evt.type == EventType::PLAYERLAUNCHED) {
         m_playerLaunches++;
         if (renderer != nullptr) {
-            renderer->setLaunches(m_playerLaunches);
+            renderer->SetLaunches(m_playerLaunches);
         }
     }
 
     if (evt.type == EventType::REMOVETUTORIAL)
     {
         if (renderer != nullptr) {
-            renderer->setDisplayHint(false);
+            renderer->SetDisplayHint(false);
         }
     }
 }
@@ -165,7 +165,7 @@ void GameManager::SetLevel(int levelNumber)
     m_levelLoader = nullptr;
     renderer = new UIRenderer();
     renderer->Initialise(m_playerLives, m_playerLaunches, m_levelNumber);
-    renderer->setLevel(levelNumber);
+    renderer->SetLevel(levelNumber);
     ObjectManager::instance.AddItem(renderer);
 
     if (!result) {

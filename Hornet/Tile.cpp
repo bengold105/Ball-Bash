@@ -129,16 +129,6 @@ void Tile::Render()
     }
 }
 
-void Tile::RenderDebug()
-{
-    if (IsCollidable())
-    {
-        GameObject::RenderDebug();
-        GameObject::AddDebugLine("width: ", m_width);
-        GameObject::AddDebugLine("height: ", m_height);
-        AddDebugLine("Type:", "COLLISION_TILE");
-    }
-}
 
 void Tile::EnableBoost(bool enable)
 {
