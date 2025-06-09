@@ -7,8 +7,8 @@ Background::Background() : GameObject(ObjectType::BACKGROUND)
 
 void Background::initialise()
 {
-    m_scale = 4;
-    LoadImage("assets/spacebackground.jpg");
+    m_scale = 2;
+    LoadImage("assets/spacebackground.png");
     SetDrawDepth(-1);
 }
 

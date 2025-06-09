@@ -10,10 +10,9 @@
 
 /*
 TODO List:
-- fix sound effects
-- add background
-- polish levels
-- remove magic numbers
+- polish levels !!!
+- add level logic: scoring
+- remove magic numbers !!!
 */
 
 
@@ -30,17 +29,6 @@ void Game::StartOfProgram()
 // Use this function to intialise your game objects and load any assets
 void Game::StartOfGame()
 {
-    /*Background* background = new Background();
-    background->initialise();
-    ObjectManager::instance.AddItem(background);
-    Player* player = new Player();
-    player->Initialise();
-    ObjectManager::instance.AddItem(player);*/
-
-    /*ObjectManager::instance.SetCurrentScene(1);
-    LevelLoader* levelLoader = new LevelLoader();
-    levelLoader->LoadLevel(1);
-    delete levelLoader;*/
 
     GameManager* gameManager = new GameManager();
     gameManager->Initialise();

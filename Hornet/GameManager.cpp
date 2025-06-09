@@ -11,7 +11,7 @@ GameManager::GameManager() : GameObject(ObjectType::GAMEMANAGER)
 void GameManager::Initialise()
 {
     levelComplete = false;
-    m_levelNumber = 1;
+    m_levelNumber = 4;
     m_score = 0;
     m_playerLaunches = 0;
     m_playerLives = 3;
