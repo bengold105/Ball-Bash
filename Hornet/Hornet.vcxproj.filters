@@ -106,7 +106,7 @@
     <ClCompile Include="PlayerReticle.cpp">
       <Filter>Game\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
+    <ClCompile Include="ReticleDisplay.cpp">
       <Filter>Game\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
@@ -204,7 +204,7 @@
     <ClInclude Include="PlayerReticle.h">
       <Filter>Game\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h">
+    <ClInclude Include="ReticleDisplay.h">
       <Filter>Game\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
@@ -234,5 +234,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

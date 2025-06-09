@@ -30,18 +30,18 @@ void PlayerReticle::Update(double frametime)
     
 
 
-    directionTriangle->setPosition(m_position);
-    directionTriangle->setAngle(direction.angle() + 180); 
+    directionTriangle->SetPosition(m_position);
+    directionTriangle->SetAngle(direction.angle() + 180); 
 }
 
 void PlayerReticle::Initialise()
 {
     LoadImage("assets/UICircle.png");
-    directionTriangle = new Image("assets/UITriangle.png");
-    directionTriangle->initialise();
+    directionTriangle = new ReticleDisplay("assets/UITriangle.png");
+    directionTriangle->Initialise();
     ObjectManager::instance.AddItem(directionTriangle);
-    directionTriangle->setPosition(m_position);
-    directionTriangle->setScale(0);
+    directionTriangle->SetPosition(m_position);
+    directionTriangle->SetScale(0);
     m_scale = MIN_RETICLE_SCALE;
     
 }
@@ -83,7 +83,7 @@ void PlayerReticle::ScaleReticle(double frametime)
         if (m_scale < MAX_RETICLE_SCALE) {
             m_scale += RETICLE_SCALE_FACTOR * frametime;
         }
-        directionTriangle->setScale(force / MAX_FORCE * (MAX_TRIANGLE_SCALE - MIN_TRIANGLE_SCALE) + MIN_TRIANGLE_SCALE);
+        directionTriangle->SetScale(force / MAX_FORCE * (MAX_TRIANGLE_SCALE - MIN_TRIANGLE_SCALE) + MIN_TRIANGLE_SCALE);
     }
     else
     {
@@ -91,11 +91,11 @@ void PlayerReticle::ScaleReticle(double frametime)
             m_scale -= RETICLE_SCALE_FACTOR * frametime;
         }
 
-        if (directionTriangle->getScale() > MIN_RETICLE_SCALE) {
-            directionTriangle->setScale(directionTriangle->getScale() - RETICLE_SCALE_FACTOR * frametime);
+        if (directionTriangle->GetScale() > MIN_RETICLE_SCALE) {
+            directionTriangle->SetScale(directionTriangle->GetScale() - RETICLE_SCALE_FACTOR * frametime);
         }
         else {
-            directionTriangle->setScale(0);
+            directionTriangle->SetScale(0);
         }
     }
 }

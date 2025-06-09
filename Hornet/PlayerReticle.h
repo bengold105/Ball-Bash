@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Image.h"
+#include "ReticleDisplay.h"
 class PlayerReticle : public GameObject
 {
 public:
@@ -12,16 +12,17 @@ public:
     void SetPosition(Vector2D& position);
     //sets object angle
     void SetAngle(double angle);
+    bool IsActivated();
     //activates or deactivates the reticle
     void Activate(bool activate);
-    bool IsActivated();
-    //sets force vector (used by parent class to store mouse movement)
+    //sets force vector (used by player class to store mouse movement)
     void SetForceVector(Vector2D force);
+private:
     //if activated, scales the reticle and triangle based on recorded mouse movement
     void ScaleReticle(double frametime);
-private:
+
     //triangle showing the direction and launch power so the player can see how strong the launch will be
-    Image* directionTriangle;
+    ReticleDisplay* directionTriangle;
     bool activated;
     //vector representing the recorded mouse movement from parent class
     Vector2D m_force;

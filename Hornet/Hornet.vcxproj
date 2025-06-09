@@ -157,7 +157,7 @@
     <ClCompile Include="HtGraphics.cpp" />
     <ClCompile Include="HtKeyboard.cpp" />
     <ClCompile Include="HtMouse.cpp" />
-    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="ReticleDisplay.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="PlayerReticle.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -190,7 +190,7 @@
     <ClInclude Include="HtGraphics.h" />
     <ClInclude Include="HtKeyboard.h" />
     <ClInclude Include="HtMouse.h" />
-    <ClInclude Include="Image.h" />
+    <ClInclude Include="ReticleDisplay.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="PlayerReticle.h" />
     <ClInclude Include="Projectile.h" />
@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
