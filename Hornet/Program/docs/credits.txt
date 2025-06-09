@@ -65,6 +65,14 @@ floortile-finish.png by Ben Goldstein
 
 spikes.png by Ben Goldstein
 
+TurretA1-7.png made by Ben Goldstein
+
+BasketballA1-10.png made by Ben Goldstein
+
+BoostpadA1-5.png made by Ben Goldstein
+
+cannonball.png made by Ben Goldstein
+
 bricks.png by alpha_rats from OpenGameArt.org
 https://opengameart.org/content/bricks-tiled-texture-64x64
 

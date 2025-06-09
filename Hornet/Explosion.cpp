@@ -6,7 +6,7 @@ Explosion::Explosion() : GameObject(ObjectType::EXPLOSION)
 
 }
 
-void Explosion::Initialise(Vector2D position, bool deadPlayer)
+void Explosion::Initialise(Vector2D position, bool deadPlayer, int scale)
 {
     m_timer = 0;
     m_position = position;
@@ -18,11 +18,14 @@ void Explosion::Initialise(Vector2D position, bool deadPlayer)
     LoadImage("assets/explosionA6.bmp");
     LoadImage("assets/explosionA7.bmp");
     LoadImage("assets/explosionA8.bmp");
+    playerDeath = deadPlayer;
     explosionSound = HtAudio::instance.LoadSound("assets/explosion1.wav");
     int channel = HtAudio::instance.Play(explosionSound);
-    playerDeath = deadPlayer;
+    if (!playerDeath) {
+        HtAudio::instance.SetChannelVolume(channel, 0.1); // Lower volume for player death explosion
+    }
     SetDrawDepth(5);
-    m_scale = 6;
+    m_scale = scale;
 }
 
 void Explosion::Update(double frametime)

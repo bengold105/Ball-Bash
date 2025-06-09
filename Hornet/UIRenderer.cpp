@@ -7,6 +7,7 @@ void UIRenderer::Initialise(int lives, int launches, int currentLevel)
     m_lives = lives;
     m_launches = launches;
     m_currentLevel = currentLevel;
+    displayHint = true;
     SetDrawDepth(10);
 }
 
@@ -15,6 +16,9 @@ void UIRenderer::Render()
     if (ObjectManager::instance.GetCurrentScene() > 0) {
         DisplayLaunches();
         DisplayLives();
+        if (m_currentLevel == 1 && displayHint) {
+            DisplayTip();
+        }
     }
 }
 
@@ -68,6 +72,22 @@ void UIRenderer::DisplayLives()
 
 void UIRenderer::DisplayTip()
 {
+    HtGraphics::instance.WriteTextCentered(
+        HtCamera::instance.GetCameraCentre(Vector2D(0,0)),
+        "Left click and drag the mouse to aim and release to launch",
+        HtGraphics::WHITE,
+        0,
+        0.0,
+        2.0
+    );
+    HtGraphics::instance.WriteTextCentered(
+        Vector2D(HtCamera::instance.GetCameraCentre(Vector2D(0, 0)).XValue, HtCamera::instance.GetCameraCentre(Vector2D(0, 0)).YValue - 200),
+        "Reach the finish line to complete the level",
+        HtGraphics::WHITE,
+        0,
+        0.0,
+        2.0
+    );
 }
 
 void UIRenderer::setLives(int lives)
@@ -83,5 +103,10 @@ void UIRenderer::setLaunches(int launches)
 void UIRenderer::setLevel(int level)
 {
     m_currentLevel = level;
+}
+
+void UIRenderer::setDisplayHint(bool display)
+{
+    displayHint = display;
 }
 

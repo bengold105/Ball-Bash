@@ -101,6 +101,13 @@ void GameManager::HandleEvent(Event evt)
             renderer->setLaunches(m_playerLaunches);
         }
     }
+
+    if (evt.type == EventType::REMOVETUTORIAL)
+    {
+        if (renderer != nullptr) {
+            renderer->setDisplayHint(false);
+        }
+    }
 }
 
 void GameManager::SetPlayerLaunches(int launch)
@@ -126,6 +133,7 @@ void GameManager::SetLevel(int levelNumber)
     ObjectManager::instance.DeleteInactiveItems();
     renderer = new UIRenderer();
     renderer->Initialise(m_playerLives, m_playerLaunches, m_levelNumber);
+    renderer->setLevel(levelNumber);
     ObjectManager::instance.AddItem(renderer);
 }
 

@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Adventurer.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Angle.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -161,17 +161,19 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="PlayerReticle.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Shapes.cpp" />
     <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Turret.cpp" />
     <ClCompile Include="UIRenderer.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Adventurer.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Angle.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Enemy.h" />
@@ -193,6 +195,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="PlayerReticle.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="objecttypes.h" />
@@ -200,6 +203,7 @@
     <ClInclude Include="Shapes.h" />
     <ClInclude Include="Spikes.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Turret.h" />
     <ClInclude Include="UIRenderer.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>

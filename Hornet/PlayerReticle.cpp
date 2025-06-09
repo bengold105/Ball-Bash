@@ -4,7 +4,7 @@
 #include "ObjectManager.h"
 
 const double MAX_FORCE = 500;
-const double MIN_RETICLE_SCALE = 1.43;
+const double MIN_RETICLE_SCALE = 1.2;
 const double MAX_RETICLE_SCALE = 3;
 const double MIN_TRIANGLE_SCALE = 1.4;
 const double MAX_TRIANGLE_SCALE = 1.7 + MIN_TRIANGLE_SCALE;

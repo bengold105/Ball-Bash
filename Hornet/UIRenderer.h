@@ -13,7 +13,9 @@ public:
     void setLives(int lives);
     void setLaunches(int launches);
     void setLevel(int level);
+    void setDisplayHint(bool display);
 private:
+    bool displayHint;
     int m_currentLevel;
     int m_lives;
     int m_launches;

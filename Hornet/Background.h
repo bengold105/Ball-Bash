@@ -6,5 +6,6 @@ class Background :
 public:
     Background();
     void initialise();
+    void Update(double frametime) override;
 };
 

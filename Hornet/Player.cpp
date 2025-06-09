@@ -1,4 +1,4 @@
-#include "Adventurer.h"
+#include "Player.h"
 #include "HtKeyboard.h"
 #include "HtCamera.h"
 #include "HtMouse.h"
@@ -8,11 +8,11 @@
 #include <iostream>
 #include <cmath>
 #include "Explosion.h"
+#include "Tile.h"
 
-const double ATTACK_REACH = 150;
 const double MAX_LAUNCH_POWER = 500;
 
-Adventurer::Adventurer() : GameObject(ObjectType::PLAYER) 
+Player::Player() : GameObject(ObjectType::PLAYER) 
 {
     m_reticle = nullptr;
     lastCollidedObject = nullptr;
@@ -20,13 +20,13 @@ Adventurer::Adventurer() : GameObject(ObjectType::PLAYER)
     prepLaunch = false;
 }
 
-Adventurer::~Adventurer()
+Player::~Player()
 {
     m_reticle->Deactivate();
     m_reticle = nullptr;
 }
 
-void Adventurer::Update(double frametime)
+void Player::Update(double frametime)
 {
     //locks the controls until the player has slowed down enough
     lockedControls = true;
@@ -40,6 +40,14 @@ void Adventurer::Update(double frametime)
             HtMouse::instance.SetPointerPosition(852, 548);
             m_reticle->Activate(true);
             prepLaunch = true;
+            //removes the tutorial hint after clicking
+            if (!tutorialRemoved) {
+                tutorialRemoved = true;
+                Event event = Event();
+                event.pSource = this;
+                event.type = REMOVETUTORIAL;
+                ObjectManager::instance.HandleEvent(event);
+            }
         }
     }
 
@@ -63,22 +71,7 @@ void Adventurer::Update(double frametime)
     m_reticle->SetPosition(m_position);
 }
 
-void Adventurer::Initialise()
-{
-    SetDrawDepth(3);
-    m_reticle = new PlayerReticle();
-    m_reticle->Initialise();
-    ObjectManager::instance.AddItem(m_reticle);
-    m_scale = 2;
-    m_position = Vector2D(0, 0);
-    m_velocity = Vector2D(0, 0);
-    LoadImage("assets/newplaceholderplayer.png");
-    m_collisionShape = Circle2D(m_position, 92);
-    ballBounce = NO_SOUND_INDEX;
-    SetCollidable();
-}
-
-void Adventurer::Initialise(Vector2D spawn)
+void Player::Initialise(Vector2D spawn)
 {
     SetDrawDepth(9);
     m_reticle = new PlayerReticle();
@@ -87,12 +80,22 @@ void Adventurer::Initialise(Vector2D spawn)
     m_position = spawn;
     m_scale = 2;
     m_velocity = Vector2D(0, 0);
-    LoadImage("assets/newplaceholderplayer.png");
+    LoadImage("assets/basketballA1.png");
+    LoadImage("assets/basketballA2.png");
+    LoadImage("assets/basketballA3.png");
+    LoadImage("assets/basketballA4.png");
+    LoadImage("assets/basketballA5.png");
+    LoadImage("assets/basketballA6.png");
+    LoadImage("assets/basketballA7.png");
+    LoadImage("assets/basketballA8.png");
+    LoadImage("assets/basketballA9.png");
+    LoadImage("assets/basketballA10.png");
     m_collisionShape = Circle2D(m_position, 92);
     SetCollidable();
+    tutorialRemoved = false;
 }
 
-void Adventurer::ProcessCollision(GameObject& other)
+void Player::ProcessCollision(GameObject& other)
 {
     ObjectType collidedType = other.GetType();
     if (collidedType == ObjectType::WALL && lastCollidedObject != &other) {
@@ -125,23 +128,45 @@ void Adventurer::ProcessCollision(GameObject& other)
         Deactivate();
     }
 
-    if (collidedType == ObjectType::SPIKES) {
+    if (collidedType == ObjectType::SPIKES || collidedType == ObjectType::PROJECTILE) {
         Explosion* explosion = new Explosion();
-        explosion->Initialise(m_position, true);
+        explosion->Initialise(m_position, true, 6);
         ObjectManager::instance.AddItem(explosion);
-        m_reticle->Deactivate();
+        if (collidedType == ObjectType::PROJECTILE) {
+            other.Deactivate(); 
+        }
         Deactivate();
     }
+    if (lastCollidedBoosts.empty()) {
+        if (collidedType == ObjectType::BOOST) {
+            Vector2D boostDirection = Vector2D(0, 0);
+            boostDirection.setBearing(dynamic_cast<Tile&>(other).GetAngle(), MAX_LAUNCH_POWER * 6);
+            m_velocity += boostDirection;
+            lastCollidedBoosts.push_back(&other);
+            dynamic_cast<Tile&>(other).EnableBoost(false);
 
+        }
+    }
+    else {
+        if (collidedType == ObjectType::BOOST && lastCollidedBoosts.back() != &other) {
+            Vector2D boostDirection = Vector2D(0, 0);
+            boostDirection.setBearing(dynamic_cast<Tile&>(other).GetAngle(), MAX_LAUNCH_POWER * 6);
+            m_velocity += boostDirection;
+            lastCollidedBoosts.push_back(&other);
+            dynamic_cast<Tile&>(other).EnableBoost(false);
+
+        }
+    }
+    
 }
 
-IShape2D& Adventurer::GetCollisionShape()
+IShape2D& Player::GetCollisionShape()
 {
     return m_collisionShape;
 }
 
 
-void Adventurer::Launch()
+void Player::Launch()
 {
     Vector2D direction = HtMouse::instance.GetPointerGamePosition() - m_position;
     double launchPower = direction.magnitude();
@@ -154,19 +179,37 @@ void Adventurer::Launch()
     event.pSource = this;
     event.type = PLAYERLAUNCHED;
     ObjectManager::instance.HandleEvent(event);
+    lastCollidedBoosts.clear();
 }
 
-void Adventurer::UpdateMovement(double frametime)
+void Player::UpdateMovement(double frametime)
 {
     Vector2D friction = -m_velocity;
     m_velocity += friction * frametime;
+    if (m_velocity.magnitude() > 10) {
+        m_timer += 16 * frametime / MAX_LAUNCH_POWER * m_velocity.magnitude();
+        if (static_cast<int>(m_timer) >= 10) {
+            m_timer = 0;
+        }
+        m_imageNumber = static_cast<int>(m_timer);
+    }
     if (m_velocity.magnitude() < 100) {
         m_velocity += 2 * friction * frametime;
     }
     if (m_velocity.magnitude() < 10) {
-        m_velocity = Vector2D(0, 0);
-        lockedControls = false;
-        lastCollidedObject = nullptr;
+        EndLaunch();
     }
     m_position += m_velocity * frametime;
+}
+
+void Player::EndLaunch()
+{
+    m_velocity = Vector2D(0, 0);
+    lockedControls = false;
+    lastCollidedObject = nullptr;
+    for (GameObject* boost : lastCollidedBoosts) {
+        if (boost != nullptr && boost->GetType() == ObjectType::BOOST) {
+            dynamic_cast<Tile&>(*boost).EnableBoost(true);
+        }
+    }
 }

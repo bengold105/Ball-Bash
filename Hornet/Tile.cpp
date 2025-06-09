@@ -2,7 +2,7 @@
 #include "HtCamera.h"
 #include "HtGraphics.h"
 #include <iostream>
-#include "Adventurer.h"
+#include "Player.h"
 #include "ObjectManager.h"
 
 Tile::Tile(ObjectType type) : GameObject(type)
@@ -14,36 +14,59 @@ Tile::Tile(ObjectType type) : GameObject(type)
 
 void Tile::Initialise(const char* image, Vector2D position, double angle, double scale)
 {
-    LoadImage(image);
+    if (GetType() != ObjectType::BOOST) {
+        LoadImage(image);
+    }
+    else {
+        LoadImage("assets/BoostpadA1.png");
+        LoadImage("assets/BoostpadA2.png");
+        LoadImage("assets/BoostpadA3.png");
+        LoadImage("assets/BoostpadA4.png");
+        LoadImage("assets/BoostpadA5.png");
+    }
     m_position = position;
     m_angle = angle;
     m_scale = scale;
+    pulsed = false;
 
-    if (GetType() == ObjectType::WALL)
+    if ((GetType() == ObjectType::WALL) || (GetType() == ObjectType::LEVELEND))
     {
         SetCollidable();
     }
     if (GetType() == ObjectType::SPAWNPOINT)
     {
-        Adventurer* player = new Adventurer();
+        Player* player = new Player();
         player->Initialise(m_position);
         ObjectManager::instance.AddItem(player);
     }
-    if (GetType() == ObjectType::LEVELEND)
+    if (GetType() == ObjectType::BOOST)
     {
+        enableBoost = true;
         SetCollidable();
     }
 }
 
 void Tile::Update(double frametime)
 {
+    if (GetType() == ObjectType::BOOST)
+    {
+
+        if (pulsed)
+        {
+            m_timer -= 4 * frametime;
+        }
+        else
+        {
+            m_timer += 4 * frametime;
+        }
+    }
 }
 
 void Tile::SetDimensions(int width, int height)
 {
     m_width = static_cast<int>(width * m_scale);
     m_height = static_cast<int>(height * m_scale);
-    if (IsCollidable() && GetType() == ObjectType::WALL)
+    if (IsCollidable() && (GetType() == ObjectType::WALL || GetType() == ObjectType::BOOST))
     {
         Vector2D bottomLeft(m_position.XValue - (m_width / 2), m_position.YValue - (m_width / 2));
         Vector2D topRight(m_position.XValue + (m_height / 2), m_position.YValue + (m_height / 2));
@@ -58,6 +81,11 @@ void Tile::SetDimensions(int width, int height)
     }
 }
 
+double Tile::GetAngle()
+{
+    return m_angle;
+}
+
 IShape2D& Tile::GetCollisionShape()
 {
     return m_collisionShape;
@@ -70,13 +98,34 @@ void Tile::ProcessCollision(GameObject& other)
 
 void Tile::Render()
 {
+    if (static_cast<int>(m_timer) > 4)
+    {
+        m_timer = 4.0;
+        pulsed = true;
+    }
+    else if (static_cast<int>(m_timer) < 0)
+    {
+        m_timer = 0;
+        pulsed = false;
+    }
+
+
     Rectangle2D cameraArea = HtCamera::instance.GetCameraArea();
     Vector2D bottomLeft(m_position.XValue - (m_height / 2), m_position.YValue - (m_height / 2));
     Vector2D topRight(m_position.XValue + (m_height / 2), m_position.YValue + (m_height / 2));
     Rectangle2D tileArea = Rectangle2D(bottomLeft, topRight);
     if (tileArea.Intersects(cameraArea))
     {
-        HtGraphics::instance.DrawAt(m_position, m_images[0], m_scale, m_angle);
+        if (GetType() != ObjectType::BOOST)
+        {
+            HtGraphics::instance.DrawAt(m_position, m_images[0], m_scale, m_angle);
+        }
+        else if(enableBoost) {
+            HtGraphics::instance.DrawAt(m_position, m_images[static_cast<int>(m_timer)], m_scale, m_angle);
+        }
+        else if (!enableBoost) {
+            HtGraphics::instance.DrawAt(m_position, m_images[4], m_scale, m_angle);
+        }
     }
 }
 
@@ -88,5 +137,13 @@ void Tile::RenderDebug()
         GameObject::AddDebugLine("width: ", m_width);
         GameObject::AddDebugLine("height: ", m_height);
         AddDebugLine("Type:", "COLLISION_TILE");
+    }
+}
+
+void Tile::EnableBoost(bool enable)
+{
+    if (GetType() == ObjectType::BOOST)
+    {
+        enableBoost = enable;
     }
 }

@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "ObjectManager.h"
-#include "Adventurer.h"
+#include "Player.h"
 #include <iostream>
 
 const double MAX_SPEED = 300;
