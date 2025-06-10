@@ -14,7 +14,10 @@ public:
     void SetLaunches(int launches);
     void SetLevel(int level);
     void SetDisplayHint(bool display);
+    void SetCheatsEnabled(bool enable);
+    void DisplayCheats();
 private:
+    bool isCheating;
     bool displayHint;
     int m_currentLevel;
     int m_lives;

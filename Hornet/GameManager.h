@@ -23,6 +23,7 @@ private:
     void DisplayLevelComplete();
     void DisplayGameOver();
 
+    bool notCheating;
     int totalLaunches;
     UIRenderer* renderer;
     Vector2D cameraPosition;

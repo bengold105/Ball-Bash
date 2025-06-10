@@ -14,11 +14,14 @@ public:
     void Initialise(Vector2D spawn);
     void ProcessCollision(GameObject& other) override;
     IShape2D& GetCollisionShape() override;
+    void SetDamageable(bool enable);
+    bool GetDamageable();
 private:
     void Launch();
     void UpdateMovement(double frametime);
     void EndLaunch();
 
+    bool damageable;
     bool soundPlayed;
     double soundDelay;
     bool tutorialRemoved;

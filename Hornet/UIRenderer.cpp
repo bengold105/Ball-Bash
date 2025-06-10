@@ -19,6 +19,9 @@ void UIRenderer::Render()
         if (m_currentLevel == 1 && displayHint) {
             DisplayTip();
         }
+        if (isCheating) {
+            DisplayCheats();
+        }
     }
 }
 
@@ -108,5 +111,22 @@ void UIRenderer::SetLevel(int level)
 void UIRenderer::SetDisplayHint(bool display)
 {
     displayHint = display;
+}
+
+void UIRenderer::SetCheatsEnabled(bool enable)
+{
+    isCheating = enable;
+}
+
+void UIRenderer::DisplayCheats()
+{
+    HtGraphics::instance.WriteTextAligned(
+        static_cast<int>(HtCamera::instance.GetLeftOfCameraArea()),
+        static_cast<int>(HtCamera::instance.GetTopOfCameraArea() - 100),
+        "Cheats Enabled",
+        HtGraphics::WHITE,
+        0,
+        1.25
+    );
 }
 

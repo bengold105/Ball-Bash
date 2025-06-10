@@ -38,6 +38,11 @@ void Tile::Initialise(const char* image, Vector2D position, double angle, double
         Player* player = new Player();
         player->Initialise(m_position);
         ObjectManager::instance.AddItem(player);
+
+        Event event = Event();
+        event.pSource = this;
+        event.type = PLAYERSPAWNED;
+        ObjectManager::instance.HandleEvent(event);
     }
     if (GetType() == ObjectType::BOOST)
     {

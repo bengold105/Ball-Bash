@@ -4,6 +4,7 @@
 #include "HtKeyboard.h"
 #include "HtCamera.h"
 #include "Background.h"
+#include "Player.h"
 
 const int LEVEL_COUNT = 7;
 const int MAX_LIVES = 5;
@@ -18,6 +19,7 @@ GameManager::GameManager() : GameObject(ObjectType::GAMEMANAGER)
 void GameManager::Initialise()
 {
     levelComplete = false;
+    notCheating = true; 
     m_levelNumber = STARTING_LEVEL;
     m_score = 0;
     m_playerLaunches = 0;
@@ -57,6 +59,7 @@ void GameManager::Update(double frametime)
     {
         renderer->SetLaunches(m_playerLaunches);
         renderer->SetLives(m_playerLives);
+        renderer->SetCheatsEnabled(!notCheating);
     }
 }
 
@@ -137,6 +140,18 @@ void GameManager::HandleEvent(Event evt)
     {
         if (renderer != nullptr) {
             renderer->SetDisplayHint(false);
+        }
+    }
+
+    if (evt.type == EventType::CHEAT) {
+        if (evt.pSource->GetType() == ObjectType::PLAYER) {
+            notCheating = dynamic_cast<Player*>(evt.pSource)->GetDamageable();
+        }
+    }
+
+    if (evt.type == PLAYERSPAWNED) {
+        if (!ObjectManager::instance.GetAllObjectsOfType(ObjectType::PLAYER).empty()) {
+            dynamic_cast<Player*>(ObjectManager::instance.GetAllObjectsOfType(ObjectType::PLAYER).at(0))->SetDamageable(notCheating);
         }
     }
 }

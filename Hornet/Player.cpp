@@ -2,6 +2,7 @@
 #include "HtCamera.h"
 #include "HtMouse.h"
 #include "ObjectManager.h"
+#include "HtKeyboard.h"
 #include <iostream>
 #include <cmath>
 #include "Explosion.h"
@@ -70,6 +71,15 @@ void Player::Update(double frametime)
         m_reticle->SetForceVector(direction);
     }
 
+    if (HtKeyboard::instance.NewKeyPressed(SDL_SCANCODE_MINUS)) {
+        damageable = !damageable;
+
+        Event event = Event();
+        event.pSource = this;
+        event.type = CHEAT;
+        ObjectManager::instance.HandleEvent(event);
+    }
+
     HtCamera::instance.PlaceAt(m_position);
     m_collisionShape.PlaceAt(m_position, 64);
     m_reticle->SetPosition(m_position);
@@ -78,6 +88,7 @@ void Player::Update(double frametime)
 void Player::Initialise(Vector2D spawn)
 {
     SetDrawDepth(9);
+    damageable = true;
     m_reticle = new PlayerReticle();
     m_reticle->Initialise();
     ObjectManager::instance.AddItem(m_reticle);
@@ -137,7 +148,7 @@ void Player::ProcessCollision(GameObject& other)
         Deactivate();
     }
 
-    if (collidedType == ObjectType::SPIKES || collidedType == ObjectType::PROJECTILE) {
+    if ((collidedType == ObjectType::SPIKES || collidedType == ObjectType::PROJECTILE) && damageable) {
         Explosion* explosion = new Explosion();
         explosion->Initialise(m_position, true, 6);
         ObjectManager::instance.AddItem(explosion);
@@ -146,6 +157,7 @@ void Player::ProcessCollision(GameObject& other)
         }
         Deactivate();
     }
+
     if (lastCollidedBoosts.empty()) {
         if (collidedType == ObjectType::BOOST) {
             Vector2D boostDirection = Vector2D(0, 0);
@@ -175,6 +187,16 @@ void Player::ProcessCollision(GameObject& other)
 IShape2D& Player::GetCollisionShape()
 {
     return m_collisionShape;
+}
+
+void Player::SetDamageable(bool enable)
+{
+    damageable = enable;
+}
+
+bool Player::GetDamageable()
+{
+    return damageable;
 }
 
 
