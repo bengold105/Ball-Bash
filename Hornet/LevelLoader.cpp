@@ -30,11 +30,6 @@ LevelLoader::LevelLoader()
 bool LevelLoader::LoadLevel(int level)
 {
 
-    //first level: tutorial level, L shaped 
-    //second level: still l shape, spike so player needs to control their launch
-    //third level: add boostpad, with multiple bends where the boostpad launches you in the right direction
-    //fourth level: combination of level 2 and 3 but with boostpad in backwards orientation so it blocks the player
-
 
 
     int level1Data[LEVEL_1_DIMENSION_X][LEVEL_1_DIMENSION_Y] = {

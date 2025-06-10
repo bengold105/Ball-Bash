@@ -15,6 +15,7 @@ public:
     void SetLevel(int level);
     void SetDisplayHint(bool display);
     void SetCheatsEnabled(bool enable);
+    //shows whether cheats are enabled
     void DisplayCheats();
 private:
     bool isCheating;

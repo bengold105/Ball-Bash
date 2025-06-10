@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+//this class displays a small triangle within the playerreticle that shows how fast the player will launch
 class ReticleDisplay : public GameObject
 {
 public:

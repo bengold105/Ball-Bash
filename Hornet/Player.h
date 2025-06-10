@@ -17,6 +17,7 @@ public:
     void SetDamageable(bool enable);
     bool GetDamageable();
 private:
+    //Launches the player with force depending on the mouse's position
     void Launch();
     void UpdateMovement(double frametime);
     void EndLaunch();
