@@ -2,4 +2,4 @@
 
 A 2D puzzle game where you play as a basketball and have to reach the finish tile in each level.
 
-![Alt Text](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnljajF1NGN3YWhuMWJxbmZyNDQzODhxajB0d29wYmFoZHZwcmttMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jRxSg9gajzeZ0LzNwN/giphy.gif)
+<iframe src="https://giphy.com/embed/jRxSg9gajzeZ0LzNwN" width="480" height="269" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/jRxSg9gajzeZ0LzNwN">via GIPHY</a></p>
